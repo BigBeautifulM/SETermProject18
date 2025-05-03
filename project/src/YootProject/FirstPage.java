@@ -7,8 +7,8 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 public class FirstPage extends JFrame {
-    private static final int MAX_PLAYER = 4;
-    private static final int MAX_PIECE = 5;
+    private static final int MAX_PLAYER = 3;
+    private static final int MAX_PIECE = 4;
     private static final int MAX_BOARD = 3;
 
     private JRadioButton[] playerNumbtn = new JRadioButton[MAX_PLAYER];
