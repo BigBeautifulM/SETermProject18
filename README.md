@@ -1,3 +1,5 @@
-SE Team Project 18
+### SE Team Project 18
 
-IDE - IntelliJ && Java JDK version - 21
+# IDE - IntelliJ 
+
+# Java JDK version - 21
