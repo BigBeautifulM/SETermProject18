@@ -10,11 +10,11 @@ public class Player {
     private int score;  // 말이 도착했을 때 얻는 점수
     private int standbyPieces;  // 아직 판 위에 올라가지 않은 말 수
 
-    public Player(int id, int initialPieceCount) {
+    public Player(int id, int pieceNum) {
         this.id = id;
         this.pieces = new ArrayList<>();
         this.score = 0;
-        this.standbyPieces = initialPieceCount;
+        this.standbyPieces = pieceNum;
     }
 
     public int getId() {
