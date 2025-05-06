@@ -122,7 +122,7 @@ public class Player {
                 if (pieces.get(p).getX() == pieces.get(q).getX() &&
                         pieces.get(p).getY() == pieces.get(q).getY()) {
 
-                    // ✅ 누적 방식으로 point 합산
+                    // 누적 방식으로 point 합산
                     pieces.get(p).setPoint(pieces.get(p).getPoint() + pieces.get(q).getPoint());
                     pieces.remove(q);
                     return 1;
