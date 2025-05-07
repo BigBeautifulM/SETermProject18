@@ -10,7 +10,7 @@ public class PlayGame implements ActionListener{
     PlayGame(int people, int mal, int boardShape)
     {
         System.out.printf("%d, %d , %d", people, mal, boardShape);
-        YootBoard board = new YootBoard();
+        YootBoard board = new YootBoard(people, mal, boardShape);
     }
 
 
