@@ -64,7 +64,7 @@ public class FirstPage extends JFrame {
                     playConfig.getPieceNum(),
                     playConfig.getBoardShape());
 
-            new PlayGame(playConfig.getPlayerNum(), playConfig.getPieceNum(), playConfig.getBoardShape());
+            new PlayGame(playConfig);
         });
 
         this.setVisible(true);
