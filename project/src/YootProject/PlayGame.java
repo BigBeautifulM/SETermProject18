@@ -7,13 +7,14 @@ import java.util.List;
 
 public class PlayGame implements ActionListener {
 
-    private PlayConfig config;             // 게임 설정
-    private YootBoard board;               // 게임 UI
-    private List<Player> players;          // 플레이어 목록
-    private int turn = 0;                  // 현재 플레이어 순번
-    private int controlPhase = 1;          // 1: 윷 던지기, 2: 말 올리기, 3: 말 이동
-    private int lastThrowResult = 0;       // 마지막 윷 결과
-    private int winner = -1;               // 승자 ID (-1 = 미정)
+    private PlayConfig config;               // 게임 설정 (플레이어 수, 말 수, 보드 타입)
+    private YootBoard board;                 // 게임 보드 UI
+    private List<Player> players;            // 플레이어 리스트
+    private int turn = 0;                    // 현재 플레이어 인덱스
+    private int controlPhase = 1;           // 1: 윷 던지기, 2: 말 생성, 3: 말 이동
+    private int lastThrowResult = 0;         // 마지막 던진 윷 결과
+    private int winner = -1;                // 승자 인덱스 (-1 = 아직 없음)
+    private List<Integer> extraTurnList = new ArrayList<>();  // 윷/모로 추가 턴 저장용 리스트
 
     public PlayGame(PlayConfig config) {
         this.config = config;
@@ -21,7 +22,7 @@ public class PlayGame implements ActionListener {
         for (int i = 0; i < config.getPlayerNum(); i++) {
             players.add(new Player(i + 1, config.getPieceNum()));
         }
-        this.board = new YootBoard(); // UI 생성
+        this.board = new YootBoard(); // 보드 UI 생성
         System.out.println("게임 시작: " + config.getPlayerNum() + "명, " + config.getPieceNum() + "개 말, 보드 타입 " + config.getBoardShape());
     }
 
@@ -33,41 +34,44 @@ public class PlayGame implements ActionListener {
         String resultText = Yoot.getResultString(lastThrowResult);
         System.out.println("Player " + (turn + 1) + " → " + resultText);
 
-        board.showThrowResult(resultText); // UI 업데이트 (연결 필요)
-        controlPhase = 2;
+        board.showThrowResult(resultText); // UI에 결과 보여주기
+
+        // 윷/모 나온 경우 추가 턴 리스트에 저장
+        if (lastThrowResult == Yoot.MO || lastThrowResult == Yoot.YOOT) {
+            extraTurnList.add(lastThrowResult);
+            System.out.println("추가 턴 획득 → 리스트 저장 (현재 크기: " + extraTurnList.size() + ")");
+        }
+
+        controlPhase = 2; // 말 생성 단계로 이동
     }
 
-    // Phase 2: 새 말 생성
+    // Phase 2: 새로운 말 생성
     private void phase2PutOnBoard() {
         Player player = players.get(turn);
         if (player.createPiece()) {
             player.movePieceAt(0, 0, lastThrowResult);
             System.out.println("새 말 생성 및 이동 완료");
-            board.updateBoard(player); // UI 업데이트 (연결 필요)
+            board.updateBoard(player); // UI 갱신 (자세한 로직은 YootBoard 쪽에서 작성 필요)
         } else {
             System.out.println("대기 말 없음 → 말 생성 불가");
         }
-        controlPhase = 3;
+        controlPhase = 3; // 말 이동 단계로 이동
     }
 
-    // Phase 3: 기존 말 이동
+    // Phase 3: 말 이동
     private void phase3MovePiece(int route, int pos) {
         Player player = players.get(turn);
         if (player.movePieceAt(route, pos, lastThrowResult)) {
             System.out.println("말 이동 완료");
         }
-
-        // 골인 처리
         if (player.checkAndHandleArrival()) {
             System.out.println("골인 → 점수 획득");
         }
-
-        // 내 말 합치기
         if (player.checkAndMergeStack()) {
             System.out.println("내 말 합치기 완료");
         }
 
-        // 상대 말 잡기
+        // 상대 말 잡기 처리
         for (int i = 0; i < players.size(); i++) {
             if (i != turn) {
                 Player opponent = players.get(i);
@@ -77,21 +81,23 @@ public class PlayGame implements ActionListener {
             }
         }
 
-        // 빽도 → 한 턴 쉬고 다음 플레이어
-        if (lastThrowResult == Yoot.BACKDO) {
-            nextTurn();
-        }
-        // 윷 or 모 → 한 번 더
-        else if (lastThrowResult == Yoot.YOOT || lastThrowResult == Yoot.MO) {
+        // 추가 턴 처리 (리스트에서 꺼내서 한 번 더 기회 주기)
+        if (!extraTurnList.isEmpty()) {
+            int nextBonus = extraTurnList.remove(0);
+            System.out.println("저장된 추가 턴 실행: " + Yoot.getResultString(nextBonus));
             controlPhase = 1;
         }
-        // 기본 → 다음 플레이어
+        // 빽도 → 바로 다음 플레이어로
+        else if (lastThrowResult == Yoot.BACKDO) {
+            nextTurn();
+        }
+        // 일반 턴 종료 → 다음 플레이어로
         else {
             nextTurn();
         }
     }
 
-    // 다음 턴으로 전환
+    // 다음 플레이어로 턴 넘기기
     private void nextTurn() {
         if (checkWinner()) {
             System.out.println("게임 종료 → Player " + (turn + 1) + " 승리!");
@@ -102,18 +108,18 @@ public class PlayGame implements ActionListener {
         System.out.println("다음 턴: Player " + (turn + 1));
     }
 
-    // 승리 조건 검사
+    // 승리자 확인
     private boolean checkWinner() {
         Player player = players.get(turn);
         if (player.getScore() >= config.getPieceNum()) {
             winner = turn;
-            board.showWinner("Player " + (turn + 1) + " 승리!"); // UI 업데이트 (연결 필요)
+            board.showWinner("Player " + (turn + 1) + " 승리!");
             return true;
         }
         return false;
     }
 
-    // UI에서 발생한 이벤트 처리
+    // 버튼 클릭 이벤트 처리
     @Override
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
