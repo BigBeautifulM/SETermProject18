@@ -65,6 +65,7 @@ public class FirstPage extends JFrame {
                     playConfig.getBoardShape());
 
             new PlayGame(playConfig);
+            dispose();
         });
 
         this.setVisible(true);

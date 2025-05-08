@@ -6,27 +6,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayGame implements ActionListener {
-
-    private PlayConfig config;               // 게임 설정 (플레이어 수, 말 수, 보드 타입)
-    private YootBoard board;                 // 게임 보드 UI
-    private List<Player> players;            // 플레이어 리스트
-    private int turn = 0;                    // 현재 플레이어 인덱스
-    private int controlPhase = 1;           // 1: 윷 던지기, 2: 말 생성, 3: 말 이동
-    private int lastThrowResult = 0;         // 마지막 던진 윷 결과
-    private int winner = -1;                // 승자 인덱스 (-1 = 아직 없음)
-    private List<Integer> extraTurnList = new ArrayList<>();  // 윷/모로 추가 턴 저장용 리스트
-
+    private Player player;
+    private PlayConfig config;
+    private YootBoard board;
+    private List<Player> players;
+    private int turn = 0;
+    private int controlPhase = 1;
+    private int lastThrowResult = 0;
+    private int winner = -1;
+    private List<Integer> extraTurnList = new ArrayList<>();
+    private Integer selectedStackValue = null;
+    private YootBoardController boardController;
+    private boolean waitingForPieceSelection = false; //판에서 선택용
     public PlayGame(PlayConfig config) {
         this.config = config;
         this.players = new ArrayList<>();
         for (int i = 0; i < config.getPlayerNum(); i++) {
             players.add(new Player(i + 1, config.getPieceNum()));
         }
-        this.board = new YootBoard(); // 보드 UI 생성
+        this.board = new YootBoard(config.getPlayerNum(), config.getPieceNum(), config.getBoardShape());
+
+        this.boardController = new YootBoardController(board);
+        board.getRandomButton().setActionCommand("ROLL_YUT");
+        board.getRandomButton().addActionListener(this);
+        board.getNewPieceButton().setActionCommand("NEW_PIECE");
+        board.getNewPieceButton().addActionListener(this);
+        board.getSelectOnBoardButton().setActionCommand("MOVE_");
+        board.getSelectOnBoardButton().addActionListener(this);
+        String[] actionCommands = {"FORCE_BACKDO", "FORCE_DO", "FORCE_GAE", "FORCE_GUL", "FORCE_YOOT", "FORCE_MO"};
+
+        for (int i = 0; i < board.getYootType().length; i++) {
+            board.getYootType()[i].setActionCommand(actionCommands[i]);
+            board.getYootType()[i].addActionListener(this);
+        }
         System.out.println("게임 시작: " + config.getPlayerNum() + "명, " + config.getPieceNum() + "개 말, 보드 타입 " + config.getBoardShape());
     }
 
-    // Phase 1: 윷 던지기
     private void phase1ThrowYut() {
         if (controlPhase != 1) return;
 
@@ -34,36 +49,62 @@ public class PlayGame implements ActionListener {
         String resultText = Yoot.getResultString(lastThrowResult);
         System.out.println("Player " + (turn + 1) + " → " + resultText);
 
-        board.showThrowResult(resultText); // UI에 결과 보여주기
 
-        // 윷/모 나온 경우 추가 턴 리스트에 저장
-        if (lastThrowResult == Yoot.MO || lastThrowResult == Yoot.YOOT) {
-            extraTurnList.add(lastThrowResult);
-            System.out.println("추가 턴 획득 → 리스트 저장 (현재 크기: " + extraTurnList.size() + ")");
-        }
-
-        controlPhase = 2; // 말 생성 단계로 이동
+        board.showThrowResult(resultText);
+        extraTurnList.add(lastThrowResult);
+        boardController.updateYootStack(extraTurnList, this);
+        controlPhase = 2;
     }
 
-    // Phase 2: 새로운 말 생성
     private void phase2PutOnBoard() {
+
+            if (selectedStackValue != null) {
+                phase2PutOnBoard(selectedStackValue);
+                boardController.updateBoard(player);
+            } else if (!extraTurnList.isEmpty()) {
+                System.out.println("스택에서 이동값을 선택하세요.");
+            } else {
+                phase2PutOnBoard(lastThrowResult); // 기본 동작
+                boardController.updateBoard(player);
+            }
+
+        }
+
+
+    private void phase2PutOnBoard(int moveValue) {
         Player player = players.get(turn);
         if (player.createPiece()) {
-            player.movePieceAt(0, 0, lastThrowResult);
-            System.out.println("새 말 생성 및 이동 완료");
-            board.updateBoard(player); // UI 갱신 (자세한 로직은 YootBoard 쪽에서 작성 필요)
+            player.movePieceAt(0, 0, moveValue);
+            System.out.println("새 말 생성 및 이동 완료 (" + Yoot.getResultString(moveValue) + ")");
+            board.updateBoard(player);
+            extraTurnList.remove((Integer) moveValue);
+            boardController.updateYootStack(extraTurnList, this);
+            boardController.updateBoard(player);
         } else {
             System.out.println("대기 말 없음 → 말 생성 불가");
         }
-        controlPhase = 3; // 말 이동 단계로 이동
+        selectedStackValue = null;
+        controlPhase = 3;
     }
 
-    // Phase 3: 말 이동
     private void phase3MovePiece(int route, int pos) {
         Player player = players.get(turn);
-        if (player.movePieceAt(route, pos, lastThrowResult)) {
-            System.out.println("말 이동 완료");
+
+        // ✅ 이동값: 선택된 스택 값이 있으면 그것을 사용, 없으면 기본값 사용
+        int moveValue = (selectedStackValue != null) ? selectedStackValue : lastThrowResult;
+
+        if (player.movePieceAt(route, pos, moveValue)) {
+            System.out.println("말 이동 완료 (" + Yoot.getResultString(moveValue) + ")");
+            board.updateBoard(player);
+            boardController.updateBoard(player);
+
+            // ✅ 스택에서 선택된 값이었다면 제거
+            if (selectedStackValue != null) {
+                extraTurnList.remove((Integer) selectedStackValue);
+                boardController.updateYootStack(extraTurnList, this);
+            }
         }
+
         if (player.checkAndHandleArrival()) {
             System.out.println("골인 → 점수 획득");
         }
@@ -71,7 +112,6 @@ public class PlayGame implements ActionListener {
             System.out.println("내 말 합치기 완료");
         }
 
-        // 상대 말 잡기 처리
         for (int i = 0; i < players.size(); i++) {
             if (i != turn) {
                 Player opponent = players.get(i);
@@ -81,23 +121,17 @@ public class PlayGame implements ActionListener {
             }
         }
 
-        // 추가 턴 처리 (리스트에서 꺼내서 한 번 더 기회 주기)
+        // ✅ 선택된 값 초기화
+        selectedStackValue = null;
+
         if (!extraTurnList.isEmpty()) {
             int nextBonus = extraTurnList.remove(0);
             System.out.println("저장된 추가 턴 실행: " + Yoot.getResultString(nextBonus));
             controlPhase = 1;
-        }
-        // 빽도 → 바로 다음 플레이어로
-        else if (lastThrowResult == Yoot.BACKDO) {
-            nextTurn();
-        }
-        // 일반 턴 종료 → 다음 플레이어로
-        else {
+        } else {
             nextTurn();
         }
     }
-
-    // 다음 플레이어로 턴 넘기기
     private void nextTurn() {
         if (checkWinner()) {
             System.out.println("게임 종료 → Player " + (turn + 1) + " 승리!");
@@ -108,7 +142,6 @@ public class PlayGame implements ActionListener {
         System.out.println("다음 턴: Player " + (turn + 1));
     }
 
-    // 승리자 확인
     private boolean checkWinner() {
         Player player = players.get(turn);
         if (player.getScore() >= config.getPieceNum()) {
@@ -119,19 +152,62 @@ public class PlayGame implements ActionListener {
         return false;
     }
 
-    // 버튼 클릭 이벤트 처리
     @Override
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
+
         if (cmd.equals("ROLL_YUT")) {
             phase1ThrowYut();
         } else if (cmd.equals("NEW_PIECE")) {
-            phase2PutOnBoard();
+            if (selectedStackValue != null) {
+                phase2PutOnBoard(selectedStackValue);
+            } else {
+                System.out.println("스택에서 값을 먼저 선택해주세요.");
+            }
         } else if (cmd.startsWith("MOVE_")) {
             String[] parts = cmd.split("_");
             int route = Integer.parseInt(parts[1]);
             int pos = Integer.parseInt(parts[2]);
             phase3MovePiece(route, pos);
         }
+
+        else if (cmd.startsWith("STACK_")) {
+            selectedStackValue = Integer.parseInt(cmd.split("_")[1]);
+            System.out.println("선택된 스택 값: " + selectedStackValue);
+        }
+        else if (cmd.startsWith("FORCE_")) {
+            switch (cmd) {
+                case "FORCE_BACKDO":
+                    lastThrowResult = Yoot.throwBackdo();
+                    break;
+                case "FORCE_DO":
+                    lastThrowResult = Yoot.throwDo();
+                    break;
+                case "FORCE_GAE":
+                    lastThrowResult = Yoot.throwGae();
+                    break;
+                case "FORCE_GUL":
+                    lastThrowResult = Yoot.throwGul();
+                    break;
+                case "FORCE_YOOT":
+                    lastThrowResult = Yoot.throwYoot();
+                    break;
+                case "FORCE_MO":
+                    lastThrowResult = Yoot.throwMo();
+                    break;
+            }
+
+            String resultText = Yoot.getResultString(lastThrowResult);
+            System.out.println("[테스트] Player " + (turn + 1) + " → " + resultText);
+
+            board.showThrowResult(resultText);
+
+            // 윷/모일 경우 스택에 추가
+            extraTurnList.add(lastThrowResult);
+            boardController.updateYootStack(extraTurnList, this);
+
+            controlPhase = 2;
+        }
+
     }
 }

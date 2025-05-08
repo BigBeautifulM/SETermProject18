@@ -15,6 +15,7 @@ public class Player {
         this.pieces = new ArrayList<>();
         this.score = 0;
         this.standbyPieces = pieceNum;
+
     }
 
     public int getId() {

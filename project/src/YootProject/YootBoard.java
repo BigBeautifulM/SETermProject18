@@ -2,6 +2,7 @@ package YootProject;
 
 import java.awt.*;
 
+
 import javax.swing.*;
 
 public class YootBoard extends JFrame {
@@ -16,10 +17,16 @@ public class YootBoard extends JFrame {
     private int windowSizeY = 700;
     private int buttonSizeX = windowSizeX / 20;
     private int buttonSizeY = buttonSizeX;
+    private JPanel yootStackPanel;
+    private JButton randomButton = new JButton("랜덤");
+    private JLabel randomResult = new JLabel("결과: ");
+    private JButton[] yootType = new JButton[6];
 
+    private JButton[] moveOption = new JButton[2];
     JLabel line;
 
     public YootBoard(int playerNum, int pieceNum, int boardShape) {
+
 
         this.playerNum = playerNum;
         this.pieceNum = pieceNum;
@@ -153,7 +160,7 @@ public class YootBoard extends JFrame {
         yootTypeFlow.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         lowGrid.add(yootTypeFlow);
 
-        JButton[] yootType = new JButton[6];
+       //디버그 윷 선택
         for (int i = 0;  i<6; i++){
             yootType[i] = new JButton();
             yootType[i].setOpaque(true);
@@ -176,7 +183,7 @@ public class YootBoard extends JFrame {
         moveOptionFlow.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
         lowGrid.add(moveOptionFlow);
 
-        JButton[] moveOption = new JButton[2];
+
         for (int i = 0; i<2; i++){
             moveOption[i] = new JButton();
             moveOption[i].setOpaque(true);
@@ -184,6 +191,9 @@ public class YootBoard extends JFrame {
             moveOption[i].setForeground(Color.BLACK);
         }
         moveOption[0].setText("내보내기");
+
+
+
         moveOption[1].setText("판에서 선택");
         for (int i = 0; i<2; i++){
             moveOption[i].setPreferredSize(new Dimension(160,80));
@@ -195,14 +205,14 @@ public class YootBoard extends JFrame {
         randomPanel.setLayout(null);
         lowGrid.add(randomPanel);
 
-        JButton randomButton = new JButton("랜덤");
+
         randomButton.setOpaque(true);
         randomButton.setBackground(Color.LIGHT_GRAY);
         randomButton.setForeground(Color.BLACK);
         randomButton.setBounds(10,10,80,80);
         randomPanel.add(randomButton);
 
-        JLabel randomResult = new JLabel("결과: ");
+
         randomResult.setHorizontalAlignment(SwingConstants.CENTER);
         randomResult.setOpaque(true);
         randomResult.setBackground(Color.LIGHT_GRAY);
@@ -213,16 +223,16 @@ public class YootBoard extends JFrame {
         //윷스택 라벨
         JPanel yootStackwrapper = new JPanel();
         yootStackwrapper.setLayout(null);
+        yootStackwrapper.setBounds(0, 0, 450, 100); // 적절히 수정 가능
         lowGrid.add(yootStackwrapper);
 
-        JLabel yootStack = new JLabel("윷 스택");
-        yootStack.setHorizontalAlignment(SwingConstants.CENTER);
-        yootStack.setOpaque(true);
-        yootStack.setBackground(Color.LIGHT_GRAY);
-        yootStack.setForeground(Color.BLACK);
-        yootStack.setBounds(10, 10,430,80);
-        yootStackwrapper.add(yootStack);
+        yootStackPanel = new JPanel();
+        yootStackPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 20));
+        yootStackPanel.setBounds(10, 10, 430, 80);
+        yootStackPanel.setBackground(Color.LIGHT_GRAY);
+        yootStackwrapper.add(yootStackPanel);
 
+        this.add(panelPan);
         this.setTitle("Yoot Board");
         this.setSize(windowSizeX, windowSizeY);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -236,4 +246,64 @@ public class YootBoard extends JFrame {
         btn.setLocation(x, y);
         return btn;
     }
+    public JPanel getYootStackPanel() {
+        return yootStackPanel;
+    }
+    public void updateBoard(Player player){
+
+    }
+    public void showWinner(String winner){
+
+    }
+    public void showThrowResult(String result) {
+        if (randomResult != null) {
+            randomResult.setText("결과: " + result);
+            randomResult.repaint();
+            randomResult.revalidate();
+        } else {
+            System.out.println("⚠ randomResult가 null입니다!");
+        }
+    }
+    public JButton getNewPieceButton() {
+        return moveOption[0]; // "내보내기" 버튼
+    }
+    public JButton getSelectOnBoardButton() {
+        return moveOption[1]; // moveOption[1] = "판에서 선택" 버튼
+    }
+    public JButton[][] getPanButton() {
+        return panButton;
+    }
+    public JPanel getPanelPan() {
+        return panelPan;
+    }
+
+
+    public void setYootStackPanel(JPanel yootStackPanel) {
+        this.yootStackPanel = yootStackPanel;
+    }
+
+    public JButton getRandomButton() {
+        return randomButton;
+    }
+
+    public void setRandomButton(JButton randomButton) {
+        this.randomButton = randomButton;
+    }
+
+    public JLabel getRandomResult() {
+        return randomResult;
+    }
+
+    public void setRandomResult(JLabel randomResult) {
+        this.randomResult = randomResult;
+    }
+
+    public JButton[] getYootType() {
+        return yootType;
+    }
+
+    public void setYootType(JButton[] yootType) {
+        this.yootType = yootType;
+    }
 }
+
