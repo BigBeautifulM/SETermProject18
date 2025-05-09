@@ -20,7 +20,7 @@ public class PlayGame implements ActionListener {
     private YootBoardController boardController;
     private boolean waitingForPieceSelection = false; //판에서 선택용
     private ActionListener listener;
-    private int totalturn=0;
+
     public PlayGame(PlayConfig config) {
         this.config = config;
         this.players = new ArrayList<>();
@@ -70,8 +70,9 @@ public class PlayGame implements ActionListener {
         if (lastThrowResult == Yoot.BACKDO) {
             selectedStackValue = null;
             extraTurnList.remove((Integer) moveValue);
-            boardController.updateYootStack(extraTurnList, listener);
             nextTurn();
+            boardController.updateTurn(turn+1);
+            boardController.updateYootStack(extraTurnList, listener);
             System.out.println("턴 넘어감");
             return;
         }
@@ -104,7 +105,7 @@ public class PlayGame implements ActionListener {
             }
         }
 
-        boardController.updateBoard(players, totalturn,this);
+        boardController.updateBoard(players, this);
         selectedStackValue = null;
 
         if (!extraTurnList.isEmpty()) {
@@ -114,6 +115,8 @@ public class PlayGame implements ActionListener {
         } else {
             System.out.println("턴 넘어감");
             nextTurn();
+            boardController.updateTurn(turn+1);
+            boardController.updateYootStack(extraTurnList, listener);
         }
     }
 
@@ -147,7 +150,7 @@ public class PlayGame implements ActionListener {
             }
         }
 
-        boardController.updateBoard(players, totalturn,this);
+        boardController.updateBoard(players, this);
         selectedStackValue = null;
 
         if (!extraTurnList.isEmpty()) {
@@ -157,6 +160,8 @@ public class PlayGame implements ActionListener {
         } else {
             System.out.println("턴 넘어감");
             nextTurn();
+            boardController.updateTurn(turn+1);
+            boardController.updateBoard(players, this);
         }
     }
 
@@ -167,7 +172,7 @@ public class PlayGame implements ActionListener {
             board.dispose();
             return;
         }
-        totalturn+=1;
+
         turn = (turn + 1) % players.size();
         controlPhase = 1;
         System.out.println("다음 턴: Player " + (turn + 1));

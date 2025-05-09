@@ -12,6 +12,7 @@
         private JButton pieceBtn;
         private PlayGame game;
         private List<JButton> pieceButtons = new ArrayList<>();
+        private int i=0;
         public YootBoardController(YootBoard board) {
             this.board = board;
         }
@@ -32,7 +33,7 @@
             panel.repaint();
         }
 
-        public void updateBoard(List<Player> players, int currentTurnIndex, ActionListener listener) {
+        public void updateBoard(List<Player> players, ActionListener listener) {
             String[] pieceImages = {
                     "project/img/yellow1.jpg", "project/img/blue1.jpg", "project/img/green1.jpg", "project/img/red1.jpg",
                     "project/img/yellow2.jpg", "project/img/blue2.jpg", "project/img/green2.jpg", "project/img/red2.jpg",
@@ -100,12 +101,21 @@
                 String status = "P" + pid + " : 남은 말 " + p.getStandbyPieceCount() + "개, 점수 " + p.getScore();
                 playerLabels[pid - 1].setText(status);
             }
-            JLabel turnLabel = board.getTurnLabel();
-            if (turnLabel != null) {
-                turnLabel.setText("현재 차례: P" + (currentTurnIndex + 2));
-            }
+
+
+
+
             panel.revalidate();
             panel.repaint();
+
+        }
+        public void updateTurn(int turn){
+            JLabel turnLabel = board.getTurnLabel();
+            if (turnLabel != null) {
+
+                turnLabel.setText("현재 차례: P" + turn);
+
+            }
 
         }
         private boolean isBigCirclePosition(int route, int pos) {
