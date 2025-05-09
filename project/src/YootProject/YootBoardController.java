@@ -102,7 +102,7 @@
             }
             JLabel turnLabel = board.getTurnLabel();
             if (turnLabel != null) {
-                turnLabel.setText("현재 차례: P" + (currentTurnIndex + 1));
+                turnLabel.setText("현재 차례: P" + (currentTurnIndex + 2));
             }
             panel.revalidate();
             panel.repaint();
