@@ -1,7 +1,8 @@
 package YootProject;
 
 import java.awt.*;
-
+import java.util.List;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -38,106 +39,277 @@ public class YootBoard extends JFrame {
         Cursor newcursor = tools.createCustomCursor(mouseimg, new Point(0, 0), "LOL");
         setCursor(newcursor);
 
-        line = new JLabel(new ImageIcon("project/img/line.png"));
-
         panelPan = new JPanel();
-        panButton = new JButton[3][21];
-        int xpos = buttonSizeX * 7;
-        int ypos = buttonSizeY * 7;
-        double buttonInterval = buttonSizeX * 1.25;
         panelPan.setLayout(null);
         panelPan.setBackground(new Color(255, 255, 255));
 
-        line.setSize(330, 332);
-        line.setLocation(52, 50);
+        switch(this.boardShape){
+            case 4:
+                line = new JLabel(new ImageIcon("project/img/line.png"));
+                panButton = new JButton[3][21];
+                int xpos = buttonSizeX * 7;
+                int ypos = buttonSizeY * 7;
+                double buttonInterval = buttonSizeX * 1.25;
 
-        for (int i = 1; i < 21; i++) {
-            if (i < 6) {
-                ypos -= buttonInterval;
-            } else if (i < 11) {
-                xpos -= buttonInterval;
-            } else if (i < 16) {
-                ypos += buttonInterval;
-            } else {
-                xpos += buttonInterval;
-            }
+                line.setSize(330, 332);
+                line.setLocation(52, 50);
 
-            if (i == 20 || i == 15) {
-                panButton[0][i] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
-            } else if (i == 5) {
-                panButton[1][0] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
-            }
-            else if(i==10){
-                panButton[2][0] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
-            }else {
-                panButton[0][i] = new JButton(new ImageIcon("project/img/circle.jpg"));
-            }
+                for (int i = 1; i < 21; i++) {
+                    if (i < 6) {
+                        ypos -= buttonInterval;
+                    } else if (i < 11) {
+                        xpos -= buttonInterval;
+                    } else if (i < 16) {
+                        ypos += buttonInterval;
+                    } else {
+                        xpos += buttonInterval;
+                    }
 
-                if(i<5) {
-                    panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                    if (i == 20 || i == 15) {
+                        panButton[0][i] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
+                    } else if (i == 5) {
+                        panButton[1][0] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
+                    }
+                    else if(i==10){
+                        panButton[2][0] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
+                    }else {
+                        panButton[0][i] = new JButton(new ImageIcon("project/img/circle.jpg"));
+                    }
+
+                    if(i<5) {
+                        panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                        panelPan.add(panButton[0][i]);
+                    }
+                    else if(i==5){
+                        panButton[1][0] = createBoardBtn(panButton[1][0], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                        panelPan.add(panButton[1][0]);
+                    }
+                    else if(i<10){
+                        panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                        panelPan.add(panButton[0][i]);
+                    }
+                    else if(i==10){
+                        panButton[2][0] = createBoardBtn(panButton[2][0], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                        panelPan.add(panButton[2][0]);
+                    }
+                    else{
+                        panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                        panelPan.add(panButton[0][i]);
+                    }
+
+
+                }
+
+                ypos = buttonSizeY - 10;
+                xpos = buttonSizeX * 7 - 10;
+                int p;
+                for (p = 0; p < 6; p++) {
+                    if (p == 3) {
+                        xpos -= buttonSizeX;
+                        ypos += buttonSizeY;
+                    } else {
+                        if (p == 0) {
+                            xpos -= buttonSizeX;
+                            ypos += buttonSizeY;
+                        } else {
+                            panButton[1][p] = new JButton(new ImageIcon("project/img/circle.jpg"));
+                            panButton[1][p] = createBoardBtn(panButton[1][p], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                            xpos -= buttonSizeX;
+                            ypos += buttonSizeY;
+                            panelPan.add(panButton[1][p]);
+                            panelPan.add(line);
+                        }
+                    }
+                }
+
+                xpos = buttonSizeX - 10;
+                ypos = buttonSizeY - 10;
+                for (p = 0; p < 6; p++) {
+                    if (p == 0) {
+                        xpos += buttonSizeX;
+                        ypos += buttonSizeY;
+                    } else {
+                        if (p == 3) {
+                            panButton[2][p] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
+
+                        } else {
+                            panButton[2][p] = new JButton(new ImageIcon("project/img/circle.jpg"));
+                        }
+                        panButton[2][p] = createBoardBtn(panButton[2][p], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                        xpos += buttonSizeX;
+                        ypos += buttonSizeY;
+                        panelPan.add(panButton[2][p]);
+                        panelPan.add(line);
+                    }
+                }
+                break;
+            case 5:
+                line = new JLabel(new ImageIcon("project/img/fiveline.png"));
+                line.setBounds(30,30,350,350);
+                line.setVisible(true);
+
+                panButton = new JButton[1][36];
+
+                buttonSizeX = 30;
+                buttonSizeY = buttonSizeX;
+
+                /*0,1,2,3,5 = bigcircle*/
+                /*4 = startcircle*/
+                /*else = circle*/
+                List<Point> pointsPenta = Arrays.asList(
+                        new Point(380, 159),  // 0 시계방향 기준 2시 꼭짓점
+                        new Point(205, 32),   // 1 12시 방향 꼭짓점
+                        new Point(30, 158),   // 2 10시 방향 꼭짓점
+                        new Point(99, 365),   // 3 8시 방향 꼭짓점
+                        new Point(310, 364),  // 4 출발 지점
+                        new Point(204, 215),  // 5 중심점
+                        new Point(345, 133),  // 6 0-1 외곽선 반시계 방향
+                        new Point(309, 108),  // 7
+                        new Point(274, 83),   // 8
+                        new Point(240, 57),   // 9
+                        new Point(169, 57),   // 10 1-2
+                        new Point(135, 82),   // 11
+                        new Point(100, 108),  // 12
+                        new Point(65, 133),   // 13
+                        new Point(44, 200),   // 14 2-3
+                        new Point(57, 241),   // 15
+                        new Point(71, 282),   // 16
+                        new Point(84, 323),   // 17
+                        new Point(141, 364),  // 18 3-4
+                        new Point(184, 364),  // 19
+                        new Point(225, 364),  // 20
+                        new Point(267, 364),  // 21
+                        new Point(323, 323),  // 22 4-0
+                        new Point(338, 282),  // 23
+                        new Point(352, 241),  // 24
+                        new Point(365, 200),  // 25
+                        new Point(321, 178),  // 26 0-5를 잇는 중심선
+                        new Point(262, 196),  // 27
+                        new Point(205, 92),   // 28 1-5
+                        new Point(204, 153),  // 29
+                        new Point(88, 177),   // 30 2-5
+                        new Point(147, 196),  // 31
+                        new Point(133, 315),  // 32 3-5
+                        new Point(169, 264),  // 33
+                        new Point(274, 315),  // 34 4-5
+                        new Point(240, 264)   // 35
+                );
+
+                for(int i = 0; i<36; i++){
+                    Point x = pointsPenta.get(i);
+                    ImageIcon icon;
+
+                    if(i<6&&i!=4){
+                        icon = new ImageIcon("project/img/bigcircle.jpg");
+                    }
+                    else if(i == 4){
+                        icon = new ImageIcon("project/img/startcircle.jpg");
+                    }
+                    else{
+                        icon = new ImageIcon("project/img/circle.jpg");
+                    }
+
+                    panButton[0][i] = new JButton(icon);
+                    if(i>5){
+                        panButton[0][i].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                    }
+                    else{
+                        buttonSizeX=50;
+                        buttonSizeY=buttonSizeX;
+                        panButton[0][i].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                    }
+                    panButton[0][i].setBorderPainted(false);
+                    panButton[0][i].setContentAreaFilled(false);
                     panelPan.add(panButton[0][i]);
                 }
-                else if(i==5){
-                    panButton[1][0] = createBoardBtn(panButton[1][0], xpos, ypos, buttonSizeX, buttonSizeY, false);
-                    panelPan.add(panButton[1][0]);
-                }
-                else if(i<10){
-                    panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
-                    panelPan.add(panButton[0][i]);
-                }
-                else if(i==10){
-                    panButton[2][0] = createBoardBtn(panButton[2][0], xpos, ypos, buttonSizeX, buttonSizeY, false);
-                    panelPan.add(panButton[2][0]);
-                }
-                else{
-                    panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
-                    panelPan.add(panButton[0][i]);
-                }
-
-
-        }
-
-        ypos = buttonSizeY - 10;
-        xpos = buttonSizeX * 7 - 10;
-        int p;
-        for (p = 0; p < 6; p++) {
-            if (p == 3) {
-                xpos -= buttonSizeX;
-                ypos += buttonSizeY;
-            } else {
-                if (p == 0) {
-                    xpos -= buttonSizeX;
-                    ypos += buttonSizeY;
-                } else {
-                    panButton[1][p] = new JButton(new ImageIcon("project/img/circle.jpg"));
-                    panButton[1][p] = createBoardBtn(panButton[1][p], xpos, ypos, buttonSizeX, buttonSizeY, false);
-                    xpos -= buttonSizeX;
-                    ypos += buttonSizeY;
-                    panelPan.add(panButton[1][p]);
-                    panelPan.add(line);
-                }
-            }
-        }
-
-        xpos = buttonSizeX - 10;
-        ypos = buttonSizeY - 10;
-        for (p = 0; p < 6; p++) {
-            if (p == 0) {
-                xpos += buttonSizeX;
-                ypos += buttonSizeY;
-            } else {
-                if (p == 3) {
-                    panButton[2][p] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
-
-                } else {
-                    panButton[2][p] = new JButton(new ImageIcon("project/img/circle.jpg"));
-                }
-                panButton[2][p] = createBoardBtn(panButton[2][p], xpos, ypos, buttonSizeX, buttonSizeY, false);
-                xpos += buttonSizeX;
-                ypos += buttonSizeY;
-                panelPan.add(panButton[2][p]);
                 panelPan.add(line);
-            }
+                break;
+
+            case 6:
+                line = new JLabel(new ImageIcon("project/img/sixline.png"));
+                line.setBounds(20,00,400,400);
+                line.setVisible(true);
+
+                panButton = new JButton[1][43];
+
+                buttonSizeX = 20;
+                buttonSizeY = buttonSizeX;
+
+                List<Point> pointsHexa = Arrays.asList(
+                        new Point(420, 200),  // 0
+                        new Point(320, 27),   // 1
+                        new Point(120, 27),   // 2
+                        new Point(20, 200),   // 3
+                        new Point(120, 373),  // 4
+                        new Point(320, 373),  // 5
+                        new Point(220, 200),  // 6
+                        new Point(400, 165),  // 7
+                        new Point(380, 131),  // 8
+                        new Point(360, 96),   // 9
+                        new Point(340, 61),   // 10
+                        new Point(280, 27),   // 11
+                        new Point(240, 27),   // 12
+                        new Point(200, 27),   // 13
+                        new Point(160, 27),   // 14
+                        new Point(100, 61),   // 15
+                        new Point(80, 96),    // 16
+                        new Point(60, 131),   // 17
+                        new Point(40, 165),   // 18
+                        new Point(40, 235),   // 19
+                        new Point(60, 269),   // 20
+                        new Point(80, 304),   // 21
+                        new Point(100, 339),  // 22
+                        new Point(160, 373),  // 23
+                        new Point(200, 373),  // 24
+                        new Point(240, 373),  // 25
+                        new Point(280, 373),  // 26
+                        new Point(340, 339),  // 27
+                        new Point(360, 304),  // 28
+                        new Point(380, 269),  // 29
+                        new Point(400, 235),  // 30
+                        new Point(353, 200),  // 31
+                        new Point(287, 200),  // 32
+                        new Point(287, 84),   // 33
+                        new Point(253, 143),  // 34
+                        new Point(153, 84),   // 35
+                        new Point(187, 143),  // 36
+                        new Point(87, 200),   // 37
+                        new Point(153, 200),  // 38
+                        new Point(153, 316),  // 39
+                        new Point(187, 257),  // 40
+                        new Point(287, 316),  // 41
+                        new Point(253, 257)   // 42
+                );
+
+                for(int i = 0; i<43; i++){
+                    Point x = pointsHexa.get(i);
+                    ImageIcon icon;
+
+                    if(i<7&&i!=5){
+                        icon = new ImageIcon("project/img/bigcircle.jpg");
+                    }
+                    else if(i == 5){
+                        icon = new ImageIcon("project/img/startcircle.jpg");
+                    }
+                    else{
+                        icon = new ImageIcon("project/img/circle.jpg");
+                    }
+
+                    panButton[0][i] = new JButton(icon);
+                    if(i>5){
+                        panButton[0][i].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                    }
+                    else{
+                        buttonSizeX=48;
+                        buttonSizeY=buttonSizeX;
+                        panButton[0][i].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                    }
+                    panButton[0][i].setBorderPainted(false);
+                    panButton[0][i].setContentAreaFilled(false);
+                    panelPan.add(panButton[0][i]);
+                }
+                panelPan.add(line);
+                break;
         }
 
         this.add(panelPan);
