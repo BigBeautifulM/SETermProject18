@@ -12,7 +12,7 @@ public class YootBoard extends JFrame {
     private int playerNum;
     private int pieceNum;
     private int boardShape;
-
+    private JLabel turnLabel;
     private int windowSizeX = 1000;
     private int windowSizeY = 700;
     private int buttonSizeX = windowSizeX / 20;
@@ -143,7 +143,7 @@ public class YootBoard extends JFrame {
         this.add(panelPan);
 
         //현재 차례 정보 표시 - Dull
-        JLabel turnLabel = new JLabel("현재 차례: P1");
+        turnLabel = new JLabel("현재 차례: P1");
         turnLabel.setFont(new Font("Dialog", Font.BOLD, 16));
         turnLabel.setBounds(500,20,100,30);
         turnLabel.setOpaque(true);
@@ -312,6 +312,9 @@ public class YootBoard extends JFrame {
 
     public JLabel[] getPlayerInfoLabels() {
         return playerInfo;
+    }
+    public JLabel getTurnLabel() {
+        return turnLabel;
     }
 }
 

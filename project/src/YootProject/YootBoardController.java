@@ -32,7 +32,7 @@
             panel.repaint();
         }
 
-        public void updateBoard(List<Player> players, ActionListener listener) {
+        public void updateBoard(List<Player> players, int currentTurnIndex, ActionListener listener) {
             String[] pieceImages = {
                     "project/img/yellow1.jpg", "project/img/blue1.jpg", "project/img/green1.jpg", "project/img/red1.jpg",
                     "project/img/yellow2.jpg", "project/img/blue2.jpg", "project/img/green2.jpg", "project/img/red2.jpg",
@@ -99,6 +99,10 @@
                 int pid = p.getId(); // 1-based
                 String status = "P" + pid + " : 남은 말 " + p.getStandbyPieceCount() + "개, 점수 " + p.getScore();
                 playerLabels[pid - 1].setText(status);
+            }
+            JLabel turnLabel = board.getTurnLabel();
+            if (turnLabel != null) {
+                turnLabel.setText("현재 차례: P" + (currentTurnIndex + 1));
             }
             panel.revalidate();
             panel.repaint();

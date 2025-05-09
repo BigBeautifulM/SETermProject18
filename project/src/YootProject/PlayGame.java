@@ -104,7 +104,7 @@ public class PlayGame implements ActionListener {
             }
         }
 
-        boardController.updateBoard(players, this);
+        boardController.updateBoard(players, turn+1,this);
         selectedStackValue = null;
 
         if (!extraTurnList.isEmpty()) {
@@ -147,7 +147,7 @@ public class PlayGame implements ActionListener {
             }
         }
 
-        boardController.updateBoard(players, this);
+        boardController.updateBoard(players, turn+1,this);
         selectedStackValue = null;
 
         if (!extraTurnList.isEmpty()) {
