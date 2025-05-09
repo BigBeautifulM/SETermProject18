@@ -20,7 +20,7 @@ public class PlayGame implements ActionListener {
     private YootBoardController boardController;
     private boolean waitingForPieceSelection = false; //판에서 선택용
     private ActionListener listener;
-    private int totalturn;
+    private int totalturn=0;
     public PlayGame(PlayConfig config) {
         this.config = config;
         this.players = new ArrayList<>();
@@ -147,9 +147,9 @@ public class PlayGame implements ActionListener {
             }
         }
 
-
-        selectedStackValue = null;
         boardController.updateBoard(players, totalturn,this);
+        selectedStackValue = null;
+
         if (!extraTurnList.isEmpty()) {
             int nextBonus = extraTurnList.remove(0);
             System.out.println("저장된 추가 턴 실행: " + Yoot.getResultString(nextBonus));
