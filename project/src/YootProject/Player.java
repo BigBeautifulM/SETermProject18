@@ -98,6 +98,7 @@ public class Player {
                 if (a.isAtSamePosition(b)) {
                     a.addPoint(b.getPoint());
                     pieces.remove(j);
+                    System.out.println("point"+a.getPoint());
                     return true;
                 }
             }

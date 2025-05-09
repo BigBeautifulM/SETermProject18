@@ -21,7 +21,7 @@ public class YootBoard extends JFrame {
     private JButton randomButton = new JButton("랜덤");
     private JLabel randomResult = new JLabel("결과: ");
     private JButton[] yootType = new JButton[6];
-
+    private JLabel[] playerInfo;
     private JButton[] moveOption = new JButton[2];
     JLabel line;
 
@@ -62,15 +62,39 @@ public class YootBoard extends JFrame {
                 xpos += buttonInterval;
             }
 
-            if (i == 5 || i == 10 || i == 15) {
+            if (i == 20 || i == 15) {
                 panButton[0][i] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
-            } else if (i == 20) {
-                panButton[0][i] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
-            } else {
+            } else if (i == 5) {
+                panButton[1][0] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
+            }
+            else if(i==10){
+                panButton[2][0] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
+            }else {
                 panButton[0][i] = new JButton(new ImageIcon("project/img/circle.jpg"));
             }
-            panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
-            panelPan.add(panButton[0][i]);
+
+                if(i<5) {
+                    panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                    panelPan.add(panButton[0][i]);
+                }
+                else if(i==5){
+                    panButton[1][0] = createBoardBtn(panButton[1][0], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                    panelPan.add(panButton[1][0]);
+                }
+                else if(i<10){
+                    panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                    panelPan.add(panButton[0][i]);
+                }
+                else if(i==10){
+                    panButton[2][0] = createBoardBtn(panButton[2][0], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                    panelPan.add(panButton[2][0]);
+                }
+                else{
+                    panButton[0][i] = createBoardBtn(panButton[0][i], xpos, ypos, buttonSizeX, buttonSizeY, false);
+                    panelPan.add(panButton[0][i]);
+                }
+
+
         }
 
         ypos = buttonSizeY - 10;
@@ -135,7 +159,7 @@ public class YootBoard extends JFrame {
         statusBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         panelPan.add(statusBox);
 
-        JLabel[] playerInfo = new JLabel[this.playerNum];
+        this.playerInfo = new JLabel[this.playerNum];
         int boxHeight = 40;
         for (int i = 0; i<this.playerNum; i++){
             playerInfo[i] = new JLabel("P" + (i+1) + " : 남은 말 " + this.pieceNum + "개");
@@ -277,33 +301,17 @@ public class YootBoard extends JFrame {
         return panelPan;
     }
 
-
-    public void setYootStackPanel(JPanel yootStackPanel) {
-        this.yootStackPanel = yootStackPanel;
-    }
-
     public JButton getRandomButton() {
         return randomButton;
     }
 
-    public void setRandomButton(JButton randomButton) {
-        this.randomButton = randomButton;
-    }
-
-    public JLabel getRandomResult() {
-        return randomResult;
-    }
-
-    public void setRandomResult(JLabel randomResult) {
-        this.randomResult = randomResult;
-    }
 
     public JButton[] getYootType() {
         return yootType;
     }
 
-    public void setYootType(JButton[] yootType) {
-        this.yootType = yootType;
+    public JLabel[] getPlayerInfoLabels() {
+        return playerInfo;
     }
 }
 
