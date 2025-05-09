@@ -51,10 +51,32 @@ public class YootBoardController {
                 "project/img/yellow5.jpg",
                 "project/img/blue5.jpg",
                 "project/img/green5.jpg",
-                "project/img/red5.jpg"
+                "project/img/red5.jpg",
+                "project/img/bigyellow1.jpg",
+                "project/img/bigblue1.jpg",
+                "project/img/biggreen1.jpg",
+                "project/img/bigred1.jpg",
+                "project/img/bigyellow2.jpg",
+                "project/img/bigblue2.jpg",
+                "project/img/biggreen2.jpg",
+                "project/img/bigred2.jpg",
+                "project/img/bigyellow3.jpg",
+                "project/img/bigblue3.jpg",
+                "project/img/biggreen3.jpg",
+                "project/img/bigred3.jpg",
+                "project/img/bigyellow4.jpg",
+                "project/img/bigblue4.jpg",
+                "project/img/biggreen4.jpg",
+                "project/img/bigred4.jpg",
+                "project/img/bigyellow5.jpg",
+                "project/img/bigblue5.jpg",
+                "project/img/biggreen5.jpg",
+                "project/img/bigred5.jpg"
         };
         System.out.println(playerId);
-        String imagePath = pieceImages[playerId-1];
+        String imagePath;
+
+
         JButton[][] panButton = board.getPanButton();
         JPanel panel = board.getPanelPan(); // YootBoard에 getPanelPan() 정의 필요
 
@@ -71,25 +93,38 @@ public class YootBoardController {
         int count = 0;
         for (Piece piece : player.getPieces()) {
             if (piece.getPositionIndex() < 0 || piece.getRouteIndex() < 0) continue;
-
+System.out.println("1단계 통과");
             int route = piece.getRouteIndex();
             int pos = piece.getPositionIndex();
 
             if (route >= panButton.length || pos >= panButton[route].length) continue;
-
+            System.out.println("2단계 통과");
             JButton btn = panButton[route][pos];
             if (btn == null) continue;
+            System.out.println("3단계 통과");
+            if (isBigCirclePosition(route, pos)) {
+                imagePath = pieceImages[playerId+20];
+                System.out.println("큰이미지 생성");// 특별 이미지 경로
+            }
+            else{
+                imagePath = pieceImages[playerId-1];
 
+            }
             // 말 이미지 라벨 생성
             JLabel label = new JLabel(new ImageIcon(imagePath));
             label.setName("piece_" + count++);
             label.setBounds(btn.getX(), btn.getY(), btn.getWidth(), btn.getHeight());
             panel.add(label);
             panel.setComponentZOrder(label, 0);
+            System.out.println(route+ pos);
+
         }
 
         panel.revalidate();
         panel.repaint();
+    }
+    private boolean isBigCirclePosition(int route, int pos) {
+        return (route == 0 && (pos == 5 || pos == 10 || pos == 15 || pos == 20)) || (route == 2 && pos == 3);
     }
 }
 
