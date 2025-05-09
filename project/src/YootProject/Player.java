@@ -15,6 +15,7 @@ public class Player {
         this.pieces = new ArrayList<>();
         this.score = 0;
         this.standbyPieces = pieceNum;
+
     }
 
     public int getId() {
@@ -97,6 +98,7 @@ public class Player {
                 if (a.isAtSamePosition(b)) {
                     a.addPoint(b.getPoint());
                     pieces.remove(j);
+                    System.out.println("point"+a.getPoint());
                     return true;
                 }
             }
