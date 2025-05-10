@@ -20,12 +20,25 @@ public class PlayGame implements ActionListener {
     private YootBoardController boardController;
     private boolean waitingForPieceSelection = false; //판에서 선택용
     private ActionListener listener;
+    private IBoardRouteManager routeManager;
 
     public PlayGame(PlayConfig config) {
         this.config = config;
         this.players = new ArrayList<>();
+
+        // 보드 형태에 따른 routeManager 생성
+        if (config.getBoardShape() == 4) {
+            routeManager = new SquareBoardRouteManager();
+        } else if (config.getBoardShape() == 5) {
+            routeManager = new PentBoardRouteManager();
+        } else if (config.getBoardShape() == 6) {
+            routeManager = new HexBoardRouteManager();
+        } else {
+            routeManager = new SquareBoardRouteManager(); // fallback
+        }
+
         for (int i = 0; i < config.getPlayerNum(); i++) {
-            players.add(new Player(i + 1, config.getPieceNum()));
+            players.add(new Player(i + 1, config.getPieceNum(), routeManager));
         }
         this.board = new YootBoard(config.getPlayerNum(), config.getPieceNum(), config.getBoardShape());
 
@@ -89,9 +102,12 @@ public class PlayGame implements ActionListener {
             return;
         }
 
-        if (player.movePieceAt(0, 0, moveValue)) {
+        int startRoute = routeManager.getStartRoute();
+        int startPos = routeManager.getStartPosition();
+
+        if (player.movePieceAt(startRoute, startPos, moveValue)) {
             System.out.println("새 말 생성 및 이동 완료 (" + Yoot.getResultString(moveValue) + ")");
-            consumeSelectedStackValueOnce(); // ✅ 여기서만 제거
+            consumeSelectedStackValueOnce(); // 여기서만 제거
         }
 
         player.checkAndHandleArrival();
@@ -142,7 +158,7 @@ public class PlayGame implements ActionListener {
 
         if (player.movePieceAt(route, pos, moveValue)) {
             System.out.println("말 이동 완료 (" + Yoot.getResultString(moveValue) + ")");
-            consumeSelectedStackValueOnce(); // ✅ 여기서만 제거
+            consumeSelectedStackValueOnce(); // 여기서만 제거
         }
 
         player.checkAndHandleArrival();
@@ -303,7 +319,7 @@ public class PlayGame implements ActionListener {
             extraTurnList.remove((Integer) selectedStackValue);
             boardController.updateYootStack(extraTurnList, this);
             System.out.println("스택 값 사용됨: " + selectedStackValue);
-            selectedStackValue = null; // ✅ 중복 사용 방지
+            selectedStackValue = null; // 중복 사용 방지
         }
     }
 }

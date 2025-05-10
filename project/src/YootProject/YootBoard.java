@@ -201,54 +201,55 @@ public class YootBoard extends JFrame {
 
                     if(i<6){
                         icon = new ImageIcon("project/img/bigcircle.jpg");
-                         if(i==0){
+                        if(i==0){
 
-                             panButton[1][0] = new JButton(icon);
-                             panButton[1][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                             panButton[1][0].setBorderPainted(false);
-                             panButton[1][0].setContentAreaFilled(false);
-                             panelPan.add(panButton[1][0]);
+                            panButton[1][0] = new JButton(icon);
+                            panButton[1][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                            panButton[1][0].setBorderPainted(false);
+                            panButton[1][0].setContentAreaFilled(false);
+                            panelPan.add(panButton[1][0]);
                         }
                         else if(i==1){
 
-                             panButton[2][0] = new JButton(icon);
-                             panButton[2][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                             panButton[2][0].setBorderPainted(false);
-                             panButton[2][0].setContentAreaFilled(false);
-                             panelPan.add(panButton[2][0]);
+                            panButton[2][0] = new JButton(icon);
+                            panButton[2][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                            panButton[2][0].setBorderPainted(false);
+                            panButton[2][0].setContentAreaFilled(false);
+                            panelPan.add(panButton[2][0]);
                         }
                         else if(i==2){
 
-                             panButton[3][0] = new JButton(icon);
-                             panButton[3][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                             panButton[3][0].setBorderPainted(false);
-                             panButton[3][0].setContentAreaFilled(false);
-                             panelPan.add(panButton[3][0]);
+                            panButton[3][0] = new JButton(icon);
+                            panButton[3][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                            panButton[3][0].setBorderPainted(false);
+                            panButton[3][0].setContentAreaFilled(false);
+                            panelPan.add(panButton[3][0]);
                         }
                         else if(i==3){
 
-                             panButton[4][0] = new JButton(icon);
-                             panButton[4][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                             panButton[4][0].setBorderPainted(false);
-                             panButton[4][0].setContentAreaFilled(false);
-                             panelPan.add(panButton[4][0]);
+                            panButton[4][0] = new JButton(icon);
+                            panButton[4][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                            panButton[4][0].setBorderPainted(false);
+                            panButton[4][0].setContentAreaFilled(false);
+                            panelPan.add(panButton[4][0]);
                         }
-                         else if(i==4){
+                        else if(i==4){
 
-                             panButton[0][25] = new JButton(icon);
-                             panButton[0][25].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                             panButton[0][25].setBorderPainted(false);
-                             panButton[0][25].setContentAreaFilled(false);
-                             panelPan.add(panButton[0][25]);
-                         }
+                            panButton[0][25] = new JButton(icon);
+                            panButton[0][25].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                            panButton[0][25].setBorderPainted(false);
+                            panButton[0][25].setContentAreaFilled(false);
+                            panelPan.add(panButton[0][25]);
+                        }
                         else{
 
-                             panButton[5][0] = new JButton(icon);
-                             panButton[5][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                             panButton[5][0].setBorderPainted(false);
-                             panButton[5][0].setContentAreaFilled(false);
-                             panelPan.add(panButton[5][0]);
-                         }
+                            panButton[5][0] = new JButton(icon);
+                            panButton[5][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                            panButton[5][0].setBorderPainted(false);
+                            panButton[5][0].setContentAreaFilled(false);
+                            panelPan.add(panButton[5][0]);
+                        }
+
                     }
 
                     else{
@@ -279,7 +280,8 @@ public class YootBoard extends JFrame {
                                     panButton[0][i+1].setContentAreaFilled(false);
                                     panelPan.add(panButton[0][i+1]);
                                 }
-                                else if(i>13&&i<18){
+                                else if(i>13&&i<19){
+
 
                                     panButton[0][i+2] = new JButton(icon);
                                     panButton[0][i+2].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
@@ -376,87 +378,78 @@ public class YootBoard extends JFrame {
 
             case 6:
                 line = new JLabel(new ImageIcon("project/img/sixline.png"));
-                line.setBounds(20,00,400,400);
+                line.setBounds(30, 20, 400, 400);
                 line.setVisible(true);
 
-                panButton = new JButton[1][43];
+                panButton = new JButton[7][43]; // routeIndex 0: 외곽, 1~6: 대각선 및 중심 경로
 
-                buttonSizeX = 20;
+                buttonSizeX = 30;
                 buttonSizeY = buttonSizeX;
 
                 List<Point> pointsHexa = Arrays.asList(
-                        new Point(420, 200),  // 0
-                        new Point(320, 27),   // 1
-                        new Point(120, 27),   // 2
-                        new Point(20, 200),   // 3
-                        new Point(120, 373),  // 4
-                        new Point(320, 373),  // 5
-                        new Point(220, 200),  // 6
-                        new Point(400, 165),  // 7
-                        new Point(380, 131),  // 8
-                        new Point(360, 96),   // 9
-                        new Point(340, 61),   // 10
-                        new Point(280, 27),   // 11
-                        new Point(240, 27),   // 12
-                        new Point(200, 27),   // 13
-                        new Point(160, 27),   // 14
-                        new Point(100, 61),   // 15
-                        new Point(80, 96),    // 16
-                        new Point(60, 131),   // 17
-                        new Point(40, 165),   // 18
-                        new Point(40, 235),   // 19
-                        new Point(60, 269),   // 20
-                        new Point(80, 304),   // 21
-                        new Point(100, 339),  // 22
-                        new Point(160, 373),  // 23
-                        new Point(200, 373),  // 24
-                        new Point(240, 373),  // 25
-                        new Point(280, 373),  // 26
-                        new Point(340, 339),  // 27
-                        new Point(360, 304),  // 28
-                        new Point(380, 269),  // 29
-                        new Point(400, 235),  // 30
-                        new Point(353, 200),  // 31
-                        new Point(287, 200),  // 32
-                        new Point(287, 84),   // 33
-                        new Point(253, 143),  // 34
-                        new Point(153, 84),   // 35
-                        new Point(187, 143),  // 36
-                        new Point(87, 200),   // 37
-                        new Point(153, 200),  // 38
-                        new Point(153, 316),  // 39
-                        new Point(187, 257),  // 40
-                        new Point(287, 316),  // 41
-                        new Point(253, 257)   // 42
+                        // 외곽 경로 (route 0)
+                        new Point(420, 200), new Point(400, 165), new Point(380, 131), new Point(360, 96),
+                        new Point(340, 61), new Point(320, 27), new Point(280, 27), new Point(240, 27),
+                        new Point(200, 27), new Point(160, 27), new Point(120, 27), new Point(100, 61),
+                        new Point(80, 96), new Point(60, 131), new Point(40, 165), new Point(20, 200),
+                        new Point(40, 235), new Point(60, 269), new Point(80, 304), new Point(100, 339),
+                        new Point(120, 373), new Point(160, 373), new Point(200, 373), new Point(240, 373),
+                        new Point(280, 373), new Point(320, 373), new Point(340, 339), new Point(360, 304),
+                        new Point(380, 269), new Point(400, 235), new Point(420, 200),
+
+                        // 내부 대각선 경로 및 중심 (1~6번 라인)
+                        new Point(320, 27), new Point(287, 84), new Point(253, 143), new Point(220, 200),         // route 1
+                        new Point(120, 27), new Point(153, 84), new Point(187, 143), new Point(220, 200),         // route 2
+                        new Point(20, 200), new Point(87, 200), new Point(153, 200), new Point(220, 200),         // route 3
+                        new Point(220, 200), new Point(253, 257), new Point(287, 316), new Point(220, 373), new Point(220, 200), // route 4
+                        new Point(120, 373), new Point(153, 316), new Point(187, 257), new Point(220, 200),       // route 5
+                        new Point(320, 373), new Point(287, 316), new Point(253, 257), new Point(220, 200)        // route 6
                 );
 
-                for(int i = 0; i<43; i++){
-                    Point x = pointsHexa.get(i);
-                    ImageIcon icon;
-
-                    if(i<7&&i!=5){
-                        icon = new ImageIcon("project/img/bigcircle.jpg");
-                    }
-                    else if(i == 5){
-                        icon = new ImageIcon("project/img/startcircle.jpg");
-                    }
-                    else{
-                        icon = new ImageIcon("project/img/circle.jpg");
-                    }
+                // 외곽 route 0: 0~30까지 총 31칸
+                for (int i = 0; i < 31; i++) {
+                    Point pt = pointsHexa.get(i);
+                    ImageIcon icon = (i == 0 || i == 5 || i == 10 || i == 20 || i == 25 || i == 30)
+                            ? new ImageIcon("project/img/bigcircle.jpg")
+                            : new ImageIcon("project/img/circle.jpg");
 
                     panButton[0][i] = new JButton(icon);
-                    if(i>5){
-                        panButton[0][i].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                    }
-                    else{
-                        buttonSizeX=48;
-                        buttonSizeY=buttonSizeX;
-                        panButton[0][i].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                    }
+                    panButton[0][i].setBounds(pt.x - buttonSizeX / 2, pt.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
                     panButton[0][i].setBorderPainted(false);
                     panButton[0][i].setContentAreaFilled(false);
                     panelPan.add(panButton[0][i]);
                 }
+
+                // route 1~6 내부 라인 구성
+                int[][] routeOffsets = {
+                        {31, 4}, // route 1
+                        {35, 4}, // route 2
+                        {39, 4}, // route 3
+                        {43, 5}, // route 4
+                        {48, 4}, // route 5
+                        {52, 4}  // route 6
+                };
+
+                for (int r = 1; r <= 6; r++) {
+                    int offset = routeOffsets[r - 1][0];
+                    int len = routeOffsets[r - 1][1];
+                    for (int i = 0; i < len; i++) {
+                        Point pt = pointsHexa.get(offset + i);
+                        // 중복되는 중심 좌표(220, 200)는 route 4 외에는 건너뜀
+                        if (pt.equals(new Point(220, 200)) && r != 4) {
+                            continue; // 중복 버튼 방지
+                        }
+                        ImageIcon icon = (i == len - 1) ? new ImageIcon("project/img/bigcircle.jpg") : new ImageIcon("project/img/circle.jpg");
+
+                        panButton[r][i] = new JButton(icon);
+                        panButton[r][i].setBounds(pt.x - buttonSizeX / 2, pt.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                        panButton[r][i].setBorderPainted(false);
+                        panButton[r][i].setContentAreaFilled(false);
+                        panelPan.add(panButton[r][i]);
+                    }
+                }
+
+
                 panelPan.add(line);
                 break;
         }
@@ -505,7 +498,7 @@ public class YootBoard extends JFrame {
         yootTypeFlow.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         lowGrid.add(yootTypeFlow);
 
-       //디버그 윷 선택
+        //디버그 윷 선택
         for (int i = 0;  i<6; i++){
             yootType[i] = new JButton();
             yootType[i].setOpaque(true);
