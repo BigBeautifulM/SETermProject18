@@ -148,7 +148,7 @@ public class YootBoard extends JFrame {
                 line.setBounds(30,30,350,350);
                 line.setVisible(true);
 
-                panButton = new JButton[1][36];
+                panButton = new JButton[6][36];
 
                 buttonSizeX = 30;
                 buttonSizeY = buttonSizeX;
@@ -199,28 +199,177 @@ public class YootBoard extends JFrame {
                     Point x = pointsPenta.get(i);
                     ImageIcon icon;
 
-                    if(i<6&&i!=4){
+                    if(i<6){
                         icon = new ImageIcon("project/img/bigcircle.jpg");
-                    }
-                    else if(i == 4){
-                        icon = new ImageIcon("project/img/startcircle.jpg");
-                    }
-                    else{
-                        icon = new ImageIcon("project/img/circle.jpg");
+                         if(i==0){
+
+                             panButton[1][0] = new JButton(icon);
+                             panButton[1][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                             panButton[1][0].setBorderPainted(false);
+                             panButton[1][0].setContentAreaFilled(false);
+                             panelPan.add(panButton[1][0]);
+                        }
+                        else if(i==1){
+
+                             panButton[2][0] = new JButton(icon);
+                             panButton[2][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                             panButton[2][0].setBorderPainted(false);
+                             panButton[2][0].setContentAreaFilled(false);
+                             panelPan.add(panButton[2][0]);
+                        }
+                        else if(i==2){
+
+                             panButton[3][0] = new JButton(icon);
+                             panButton[3][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                             panButton[3][0].setBorderPainted(false);
+                             panButton[3][0].setContentAreaFilled(false);
+                             panelPan.add(panButton[3][0]);
+                        }
+                        else if(i==3){
+
+                             panButton[4][0] = new JButton(icon);
+                             panButton[4][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                             panButton[4][0].setBorderPainted(false);
+                             panButton[4][0].setContentAreaFilled(false);
+                             panelPan.add(panButton[4][0]);
+                        }
+                         else if(i==4){
+
+                             panButton[0][25] = new JButton(icon);
+                             panButton[0][25].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                             panButton[0][25].setBorderPainted(false);
+                             panButton[0][25].setContentAreaFilled(false);
+                             panelPan.add(panButton[0][25]);
+                         }
+                        else{
+
+                             panButton[5][0] = new JButton(icon);
+                             panButton[5][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                             panButton[5][0].setBorderPainted(false);
+                             panButton[5][0].setContentAreaFilled(false);
+                             panelPan.add(panButton[5][0]);
+                         }
                     }
 
-                    panButton[0][i] = new JButton(icon);
-                    if(i>5){
-                        panButton[0][i].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                    }
                     else{
-                        buttonSizeX=50;
-                        buttonSizeY=buttonSizeX;
-                        panButton[0][i].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                        icon = new ImageIcon("project/img/circle.jpg");
+                        for(int k=0;k<6;k++){
+                            if(k==0){
+                                if(i<26&&i>21) {
+
+                                    panButton[0][i-21] = new JButton(icon);
+                                    panButton[0][i-21].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[0][i-21].setBorderPainted(false);
+                                    panButton[0][i-21].setContentAreaFilled(false);
+                                    panelPan.add(panButton[0][i-21]);
+                                }
+                                else if(i<10&&i>5){
+
+                                    panButton[0][i] = new JButton(icon);
+                                    panButton[0][i].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[0][i].setBorderPainted(false);
+                                    panButton[0][i].setContentAreaFilled(false);
+                                    panelPan.add(panButton[0][i]);
+                                }
+                                else if(i>9&&i<14){
+
+                                    panButton[0][i+1] = new JButton(icon);
+                                    panButton[0][i+1].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[0][i+1].setBorderPainted(false);
+                                    panButton[0][i+1].setContentAreaFilled(false);
+                                    panelPan.add(panButton[0][i+1]);
+                                }
+                                else if(i>13&&i<19){
+
+                                    panButton[0][i+2] = new JButton(icon);
+                                    panButton[0][i+2].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[0][i+2].setBorderPainted(false);
+                                    panButton[0][i+2].setContentAreaFilled(false);
+                                    panelPan.add(panButton[0][i+2]);
+                                }
+                                else if(i>17&&i<22){
+
+                                    panButton[0][i+3] = new JButton(icon);
+                                    panButton[0][i+3].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[0][i+3].setBorderPainted(false);
+                                    panButton[0][i+3].setContentAreaFilled(false);
+                                    panelPan.add(panButton[0][i+3]);
+                                }
+                                else{
+                                    continue;
+                                }
+                            }
+                            else if(k==1){
+                                if(i==26||i==27){
+
+                                    panButton[k][i-25] = new JButton(icon);
+                                    panButton[k][i-25].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[k][i-25].setBorderPainted(false);
+                                    panButton[k][i-25].setContentAreaFilled(false);
+                                    panelPan.add(panButton[k][i-25]);
+                                }
+                            }
+                            else if(k==2){
+                                if(i==28||i==29){
+
+                                    panButton[k][i-27] = new JButton(icon);
+                                    panButton[k][i-27].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[k][i-27].setBorderPainted(false);
+                                    panButton[k][i-27].setContentAreaFilled(false);
+                                    panelPan.add(panButton[k][i-27]);
+                                }
+                            }
+                            else if(k==3){
+                                if(i==30||i==31){
+
+                                    panButton[k][i-29] = new JButton(icon);
+                                    panButton[k][i-29].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[k][i-29].setBorderPainted(false);
+                                    panButton[k][i-29].setContentAreaFilled(false);
+                                    panelPan.add(panButton[k][i-29]);
+                                }
+                            }
+                            else if(k==4){
+                                if(i==33){
+
+                                    panButton[k][i-32] = new JButton(icon);
+                                    panButton[k][i-32].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[k][i-32].setBorderPainted(false);
+                                    panButton[k][i-32].setContentAreaFilled(false);
+                                    panelPan.add(panButton[k][i-32]);
+                                }
+                                if(i==32){
+
+                                    panButton[k][i-30] = new JButton(icon);
+                                    panButton[k][i-30].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[k][i-30].setBorderPainted(false);
+                                    panButton[k][i-30].setContentAreaFilled(false);
+                                    panelPan.add(panButton[k][i-30]);
+                                }
+                            }
+                            else {
+                                if(i==35){
+
+                                    panButton[k][i-34] = new JButton(icon);
+                                    panButton[k][i-34].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[k][i-34].setBorderPainted(false);
+                                    panButton[k][i-34].setContentAreaFilled(false);
+                                    panelPan.add(panButton[k][i-34]);
+                                }
+                                if(i==34){
+
+                                    panButton[k][i-32] = new JButton(icon);
+                                    panButton[k][i-32].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
+                                    panButton[k][i-32].setBorderPainted(false);
+                                    panButton[k][i-32].setContentAreaFilled(false);
+                                    panelPan.add(panButton[k][i-32]);
+                                }
+                            }
+                        }
+
                     }
-                    panButton[0][i].setBorderPainted(false);
-                    panButton[0][i].setContentAreaFilled(false);
-                    panelPan.add(panButton[0][i]);
+
+
                 }
                 panelPan.add(line);
                 break;
