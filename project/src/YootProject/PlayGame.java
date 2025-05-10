@@ -59,7 +59,13 @@ public class PlayGame implements ActionListener {
         board.showThrowResult(resultText);
         extraTurnList.add(lastThrowResult);
         boardController.updateYootStack(extraTurnList, this);
-        controlPhase = 2;
+        if(lastThrowResult==4||lastThrowResult==5) {
+            lastThrowResult = 0;
+            controlPhase = 1;
+        }
+        else {
+            controlPhase = 2;
+        }
     }
 
 
@@ -70,10 +76,11 @@ public class PlayGame implements ActionListener {
         if (lastThrowResult == Yoot.BACKDO) {
             selectedStackValue = null;
             extraTurnList.remove((Integer) moveValue);
+            System.out.println("79번줄 실행");
             nextTurn();
             boardController.updateTurn(turn+1);
             boardController.updateYootStack(extraTurnList, listener);
-            System.out.println("턴 넘어감");
+            System.out.println("턴 넘어감 페이즈2");
             return;
         }
 
@@ -84,8 +91,7 @@ public class PlayGame implements ActionListener {
 
         if (player.movePieceAt(0, 0, moveValue)) {
             System.out.println("새 말 생성 및 이동 완료 (" + Yoot.getResultString(moveValue) + ")");
-            extraTurnList.remove((Integer) moveValue);
-            boardController.updateYootStack(extraTurnList, listener);
+            consumeSelectedStackValueOnce(); // ✅ 여기서만 제거
         }
 
         player.checkAndHandleArrival();
@@ -100,20 +106,30 @@ public class PlayGame implements ActionListener {
                 for (Piece myPiece : player.getPieces()) {
                     if (opponent.captureOpponentPiece(myPiece.getRouteIndex(), myPiece.getPositionIndex())) {
                         System.out.println("Player " + (i + 1) + "의 말이 잡힘!");
+                        boardController.updateBoard(players, this);
+                        controlPhase=1;
+                        return;
                     }
                 }
             }
         }
 
         boardController.updateBoard(players, this);
+        if (checkWinner()) {
+            System.out.println("게임 종료 → Player " + (turn + 1) + " 승리!");
+            new EndPage();
+            board.dispose();
+            return;
+        }
         selectedStackValue = null;
 
         if (!extraTurnList.isEmpty()) {
-            int nextBonus = extraTurnList.remove(0);
-            System.out.println("저장된 추가 턴 실행: " + Yoot.getResultString(nextBonus));
+
+            System.out.println("128번줄 실행");
+           
             controlPhase = 1;
         } else {
-            System.out.println("턴 넘어감");
+            System.out.println("턴 넘어감 페이즈 2 2번째");
             nextTurn();
             boardController.updateTurn(turn+1);
             boardController.updateYootStack(extraTurnList, listener);
@@ -126,11 +142,7 @@ public class PlayGame implements ActionListener {
 
         if (player.movePieceAt(route, pos, moveValue)) {
             System.out.println("말 이동 완료 (" + Yoot.getResultString(moveValue) + ")");
-
-            if (selectedStackValue != null) {
-                extraTurnList.remove((Integer) selectedStackValue);
-                boardController.updateYootStack(extraTurnList, this);
-            }
+            consumeSelectedStackValueOnce(); // ✅ 여기서만 제거
         }
 
         player.checkAndHandleArrival();
@@ -144,24 +156,38 @@ public class PlayGame implements ActionListener {
                 Player opponent = players.get(i);
                 for (Piece myPiece : player.getPieces()) {
                     if (opponent.captureOpponentPiece(myPiece.getRouteIndex(), myPiece.getPositionIndex())) {
-                        System.out.println("Player " + (i + 1) + "의 말이 잡힘!");
+                        System.out.println("Player " + (i + 1) + "의 말이 잡힘! 페이즈 3");
+                        boardController.updateBoard(players, this);
+                        controlPhase=1;
+                        return;
                     }
                 }
             }
         }
 
         boardController.updateBoard(players, this);
+        if (checkWinner()) {
+            System.out.println("게임 종료 → Player " + (turn + 1) + " 승리!");
+            new EndPage();
+            board.dispose();
+            return;
+        }
         selectedStackValue = null;
 
         if (!extraTurnList.isEmpty()) {
-            int nextBonus = extraTurnList.remove(0);
-            System.out.println("저장된 추가 턴 실행: " + Yoot.getResultString(nextBonus));
+
             controlPhase = 1;
         } else {
-            System.out.println("턴 넘어감");
+            System.out.println("턴 넘어감 페이즈 3");
             nextTurn();
             boardController.updateTurn(turn+1);
             boardController.updateBoard(players, this);
+            if (checkWinner()) {
+                System.out.println("게임 종료 → Player " + (turn + 1) + " 승리!");
+                new EndPage();
+                board.dispose();
+                return;
+            }
         }
     }
 
@@ -210,10 +236,17 @@ public class PlayGame implements ActionListener {
             int pos = Integer.parseInt(parts[2]);
 
             if (waitingForPieceSelection && selectedStackValue != null) {
-                phase3MovePiece(route, pos);
-                waitingForPieceSelection = false;
-            } else {
-                System.out.println("먼저 '판에서 선택' 버튼을 누르시고, 스택 값을 선택해주십시오.");
+                Player player = players.get(turn);
+                if (player.findPieceIndexAt(route, pos) != -1) {
+                    phase3MovePiece(route, pos);
+                    waitingForPieceSelection = false;// 내 말이다
+                }
+                else  {
+                    System.out.println("상대 팀 말은 선택할 수 없습니다.");
+                    return; // 아무 것도 안 하고 종료
+                }
+
+
             }
         }
         else if (cmd.startsWith("STACK_")) {
@@ -258,12 +291,19 @@ public class PlayGame implements ActionListener {
             // 윷/모일 경우 스택에 추가
             extraTurnList.add(lastThrowResult);
             boardController.updateYootStack(extraTurnList, this);
-
-            controlPhase = 2;
         }
 
     }
+
     public boolean didSomeoneWin() {
         return checkWinner();  // 내부에서 private 메서드 호출
+    }
+    private void consumeSelectedStackValueOnce() {
+        if (selectedStackValue != null && extraTurnList.contains(selectedStackValue)) {
+            extraTurnList.remove((Integer) selectedStackValue);
+            boardController.updateYootStack(extraTurnList, this);
+            System.out.println("스택 값 사용됨: " + selectedStackValue);
+            selectedStackValue = null; // ✅ 중복 사용 방지
+        }
     }
 }
