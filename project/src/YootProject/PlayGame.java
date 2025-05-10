@@ -142,7 +142,7 @@ public class PlayGame implements ActionListener {
         if (!extraTurnList.isEmpty()) {
 
             System.out.println("128번줄 실행");
-           
+
             controlPhase = 1;
         } else {
             System.out.println("턴 넘어감 페이즈 2 2번째");
