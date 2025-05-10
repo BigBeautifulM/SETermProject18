@@ -279,7 +279,7 @@ public class YootBoard extends JFrame {
                                     panButton[0][i+1].setContentAreaFilled(false);
                                     panelPan.add(panButton[0][i+1]);
                                 }
-                                else if(i>13&&i<19){
+                                else if(i>13&&i<18){
 
                                     panButton[0][i+2] = new JButton(icon);
                                     panButton[0][i+2].setBounds(x.x - buttonSizeX / 2, x.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
