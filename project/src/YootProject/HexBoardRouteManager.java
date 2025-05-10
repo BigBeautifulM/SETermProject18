@@ -43,7 +43,7 @@ public class HexBoardRouteManager implements IBoardRouteManager {
 
     @Override
     public int getStartPosition() {
-        return 0; // 외곽의 0번 인덱스
+        return 5; // 외곽의 0번 인덱스
     }
 
     @Override

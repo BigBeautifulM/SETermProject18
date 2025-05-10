@@ -433,6 +433,10 @@ public class YootBoard extends JFrame {
                     int len = routeOffsets[r - 1][1];
                     for (int i = 0; i < len; i++) {
                         Point pt = pointsHexa.get(offset + i);
+                        // 중복되는 중심 좌표(220, 200)는 route 4 외에는 건너뜀
+                        if (pt.equals(new Point(220, 200)) && r != 4) {
+                            continue; // 중복 버튼 방지
+                        }
                         ImageIcon icon = (i == len - 1) ? new ImageIcon("project/img/bigcircle.jpg") : new ImageIcon("project/img/circle.jpg");
 
                         panButton[r][i] = new JButton(icon);

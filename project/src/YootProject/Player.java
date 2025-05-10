@@ -17,7 +17,6 @@ public class Player {
         this.score = 0;
         this.standbyPieces = pieceNum;
         this.routeManager = routeManager;
-
     }
 
     public int getId() {
@@ -39,7 +38,13 @@ public class Player {
     // 말 생성
     public boolean createPiece() {
         if (standbyPieces > 0) {
-            pieces.add(new Piece(routeManager));
+            int startRoute = routeManager.getStartRoute();
+            int startPos = routeManager.getStartPosition();
+
+            Piece piece = new Piece(routeManager);
+            piece.setRouteAndPosition(startRoute, startPos); // 출발 위치 지정
+
+            pieces.add(piece);
             standbyPieces--;
             return true;
         }
@@ -100,7 +105,7 @@ public class Player {
                 if (a.isAtSamePosition(b)) {
                     a.addPoint(b.getPoint());
                     pieces.remove(j);
-                    System.out.println("point"+a.getPoint());
+                    System.out.println("point" + a.getPoint());
                     return true;
                 }
             }
