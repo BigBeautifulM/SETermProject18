@@ -7,14 +7,16 @@ import java.util.List;
 public class Player {
     private final int id;
     private final List<Piece> pieces;
+    private final IBoardRouteManager routeManager;
     private int score;  // 말이 도착했을 때 얻는 점수
     private int standbyPieces;  // 아직 판 위에 올라가지 않은 말 수
 
-    public Player(int id, int pieceNum) {
+    public Player(int id, int pieceNum, IBoardRouteManager routeManager) {
         this.id = id;
         this.pieces = new ArrayList<>();
         this.score = 0;
         this.standbyPieces = pieceNum;
+        this.routeManager = routeManager;
 
     }
 
@@ -37,7 +39,7 @@ public class Player {
     // 말 생성
     public boolean createPiece() {
         if (standbyPieces > 0) {
-            pieces.add(new Piece());
+            pieces.add(new Piece(routeManager));
             standbyPieces--;
             return true;
         }

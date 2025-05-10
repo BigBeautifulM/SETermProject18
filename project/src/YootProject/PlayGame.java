@@ -20,12 +20,23 @@ public class PlayGame implements ActionListener {
     private YootBoardController boardController;
     private boolean waitingForPieceSelection = false; //판에서 선택용
     private ActionListener listener;
+    private IBoardRouteManager routeManager;
 
     public PlayGame(PlayConfig config) {
         this.config = config;
         this.players = new ArrayList<>();
+
+        // 보드 형태에 따른 routeManager 생성
+        if (config.getBoardShape() == 4) {
+            routeManager = new SquareBoardRouteManager();
+        } else if (config.getBoardShape() == 6) {
+            routeManager = new HexBoardRouteManager();
+        } else {
+            routeManager = new SquareBoardRouteManager(); // fallback
+        }
+
         for (int i = 0; i < config.getPlayerNum(); i++) {
-            players.add(new Player(i + 1, config.getPieceNum()));
+            players.add(new Player(i + 1, config.getPieceNum(), routeManager));
         }
         this.board = new YootBoard(config.getPlayerNum(), config.getPieceNum(), config.getBoardShape());
 
