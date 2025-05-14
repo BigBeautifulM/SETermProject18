@@ -29,6 +29,8 @@ public class PlayGame implements ActionListener {
         // 보드 형태에 따른 routeManager 생성
         if (config.getBoardShape() == 4) {
             routeManager = new SquareBoardRouteManager();
+        } else if (config.getBoardShape() == 5) {
+            routeManager = new PentBoardRouteManager();
         } else if (config.getBoardShape() == 6) {
             routeManager = new HexBoardRouteManager();
         } else {
@@ -100,9 +102,12 @@ public class PlayGame implements ActionListener {
             return;
         }
 
-        if (player.movePieceAt(0, 0, moveValue)) {
+        int startRoute = routeManager.getStartRoute();
+        int startPos = routeManager.getStartPosition();
+
+        if (player.movePieceAt(startRoute, startPos, moveValue)) {
             System.out.println("새 말 생성 및 이동 완료 (" + Yoot.getResultString(moveValue) + ")");
-            consumeSelectedStackValueOnce(); // ✅ 여기서만 제거
+            consumeSelectedStackValueOnce(); // 여기서만 제거
         }
 
         player.checkAndHandleArrival();
@@ -153,7 +158,7 @@ public class PlayGame implements ActionListener {
 
         if (player.movePieceAt(route, pos, moveValue)) {
             System.out.println("말 이동 완료 (" + Yoot.getResultString(moveValue) + ")");
-            consumeSelectedStackValueOnce(); // ✅ 여기서만 제거
+            consumeSelectedStackValueOnce(); // 여기서만 제거
         }
 
         player.checkAndHandleArrival();
@@ -314,7 +319,7 @@ public class PlayGame implements ActionListener {
             extraTurnList.remove((Integer) selectedStackValue);
             boardController.updateYootStack(extraTurnList, this);
             System.out.println("스택 값 사용됨: " + selectedStackValue);
-            selectedStackValue = null; // ✅ 중복 사용 방지
+            selectedStackValue = null; // 중복 사용 방지
         }
     }
 }

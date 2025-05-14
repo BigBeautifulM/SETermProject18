@@ -49,8 +49,14 @@ public class Piece {
         }
     }
 
+    public void setRouteAndPosition(int route, int pos) {
+        this.routeIndex = route;
+        this.positionIndex = pos;
+    }
+
     @Override
     public String toString() {
         return String.format("[R%d:%d, %d개]", routeIndex, positionIndex, point);
     }
 }
+
