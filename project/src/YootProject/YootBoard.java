@@ -1,9 +1,8 @@
 package YootProject;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Arrays;
-
+import java.util.List;
 import javax.swing.*;
 
 public class YootBoard extends JFrame {
@@ -631,4 +630,3 @@ public class YootBoard extends JFrame {
         return turnLabel;
     }
 }
-
