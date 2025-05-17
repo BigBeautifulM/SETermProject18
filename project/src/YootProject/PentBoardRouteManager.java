@@ -7,28 +7,41 @@ public class PentBoardRouteManager implements IBoardRouteManager {
         // 외곽에서 내부 대각선으로 진입 (0: 외곽)
         if (route == 0) {
             switch (pos) {
-                case 0 -> { return new BoardRouteManager.RouteChange(1, 1); }  // 2시 꼭짓점 → 중심
-                case 1 -> { return new BoardRouteManager.RouteChange(2, 1); }  // 12시 꼭짓점 → 중심
-                case 2 -> { return new BoardRouteManager.RouteChange(3, 1); }  // 10시 꼭짓점 → 중심
-                case 3 -> { return new BoardRouteManager.RouteChange(4, 1); }  // 8시 꼭짓점 → 중심
-                case 4 -> { return new BoardRouteManager.RouteChange(5, 1); }  // 출발점(4시) → 중심
+                case 5 -> { return new BoardRouteManager.RouteChange(1, 0); }  // 2시 꼭짓점 → 중심
+                case 10 -> { return new BoardRouteManager.RouteChange(2, 0); }  // 12시 꼭짓점 → 중심
+                case 15 -> { return new BoardRouteManager.RouteChange(3, 0); }  // 10시 꼭짓점 → 중심
             }
         }
 
-        // 내부 경로에서 중심점으로 연결
-        if ((route >= 1 && route <= 5) && pos == 2) {
-            return new BoardRouteManager.RouteChange(0, 5); // 모두 중심(5번 위치)에서 외곽 중앙으로 복귀
+        if (route == 1) {
+            if (pos == 3) return new BoardRouteManager.RouteChange(4, 0);
+            if (pos >= 4) return new BoardRouteManager.RouteChange(5, 0);
         }
-
+        if (route == 2) {
+            if (pos == 3) return new BoardRouteManager.RouteChange(4, 0);
+            if (pos >= 4) return new BoardRouteManager.RouteChange(5, 0);
+        }
+        if (route == 3) {
+            if (pos == 3) return new BoardRouteManager.RouteChange(4, 0);
+            if (pos >= 4) return new BoardRouteManager.RouteChange(5, 0);
+        }
+        if (route == 4 || route == 5) {
+            if (pos == 3) {
+                int offset = (route == 4) ? 14 : 24;
+                return new BoardRouteManager.RouteChange(0, pos + offset);
+            }
+            return null; // let it continue moving
+        }
         return null;
     }
 
     @Override
     public int getRouteLength(int route) {
         return switch (route) {
-            case 0 -> 36; // 외곽
-            case 1, 2, 3, 4, 5 -> 3; // 각 꼭짓점에서 중심으로 향하는 대각선 (2칸 + 중심)
-            default -> 0;
+            case 0 -> 31; // 외곽 경로
+            case 1, 2, 3 -> 6; // 대각선 (중심으로 이어짐)
+            case 4, 5 -> 3; // 중심선
+            default -> 31;
         };
     }
 
