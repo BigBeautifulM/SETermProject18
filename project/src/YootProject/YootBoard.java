@@ -227,11 +227,11 @@ public class YootBoard extends JFrame {
                         }
                         else if(i==3){
 
-                            panButton[4][0] = new JButton(icon);
-                            panButton[4][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
-                            panButton[4][0].setBorderPainted(false);
-                            panButton[4][0].setContentAreaFilled(false);
-                            panelPan.add(panButton[4][0]);
+                            panButton[0][20] = new JButton(icon);
+                            panButton[0][20].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
+                            panButton[0][20].setBorderPainted(false);
+                            panButton[0][20].setContentAreaFilled(false);
+                            panelPan.add(panButton[0][20]);
                         }
                         else if(i==4){
 
@@ -256,6 +256,7 @@ public class YootBoard extends JFrame {
                         icon = new ImageIcon("project/img/circle.jpg");
                         for(int k=0;k<6;k++){
                             if(k==0){
+
                                 if(i<26&&i>21) {
 
                                     panButton[0][i-21] = new JButton(icon);
@@ -280,7 +281,7 @@ public class YootBoard extends JFrame {
                                     panButton[0][i+1].setContentAreaFilled(false);
                                     panelPan.add(panButton[0][i+1]);
                                 }
-                                else if(i>13&&i<19){
+                                else if(i>13&&i<18){
 
 
                                     panButton[0][i+2] = new JButton(icon);
@@ -366,6 +367,7 @@ public class YootBoard extends JFrame {
                                     panButton[k][i-32].setContentAreaFilled(false);
                                     panelPan.add(panButton[k][i-32]);
                                 }
+
                             }
                         }
 
@@ -587,8 +589,28 @@ public class YootBoard extends JFrame {
     public JPanel getYootStackPanel() {
         return yootStackPanel;
     }
-    public void updateBoard(Player player){
-
+    public void updateBoard(List<Player> players) {
+        // 1. Reset all buttons (remove piece icons)
+        for (int r = 0; r < panButton.length; r++) {
+            for (int p = 0; p < panButton[r].length; p++) {
+                if (panButton[r][p] != null) {
+                    panButton[r][p].setIcon(null); // Or set to empty circle
+                }
+            }
+        }
+        // 2. For each piece of each player, draw it on the correct button
+        for (Player player : players) {
+            for (Piece piece : player.getPieces()) {
+                int route = piece.getRouteIndex();
+                int pos = piece.getPositionIndex();
+                if (route >= 0 && route < panButton.length
+                        && pos >= 0 && pos < panButton[route].length
+                        && panButton[route][pos] != null) {
+                    // Set player icon, or use color/image per player
+                    panButton[route][pos].setIcon(new ImageIcon("project/img/piece_player" + player.getId() + ".png"));
+                }
+            }
+        }
     }
     public void showWinner(String winner){
 

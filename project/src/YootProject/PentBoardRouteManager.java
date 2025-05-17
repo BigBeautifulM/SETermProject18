@@ -13,35 +13,32 @@ public class PentBoardRouteManager implements IBoardRouteManager {
             }
         }
 
-        if (route == 1) {
-            if (pos == 3) return new BoardRouteManager.RouteChange(5, 0);
-            if (pos >= 4) return new BoardRouteManager.RouteChange(4, 0);
-        }
-        if (route == 2) {
-            if (pos == 3) return new BoardRouteManager.RouteChange(5, 0);
-            if (pos >= 4) return new BoardRouteManager.RouteChange(4, 0);
-        }
-        if (route == 3) {
-            if (pos == 3) return new BoardRouteManager.RouteChange(5, 0);
-            if (pos >= 4) return new BoardRouteManager.RouteChange(4, 0);
-        }
-        if (route == 4 || route == 5) {
-            if (pos == 3) {
-                int offset = (route == 4) ? 14 : 24;
-                return new BoardRouteManager.RouteChange(0, pos + offset);
-            }
-            return null; // let it continue moving
-        }
+        if ((route == 1) && (pos == 3)) return new BoardRouteManager.RouteChange(5, 0);
+        if ((route == 2) && (pos == 3)) return new BoardRouteManager.RouteChange(5, 0);
+        if ((route == 3) && (pos == 3)) return new BoardRouteManager.RouteChange(5, 0);
+
+        if ((route == 1) && (pos == 4)) return new BoardRouteManager.RouteChange(4, 1);
+        if ((route == 1) && (pos == 5)) return new BoardRouteManager.RouteChange(4, 2);
+
+        if ((route == 2) && (pos == 4)) return new BoardRouteManager.RouteChange(4, 1);
+        if ((route == 2) && (pos == 5)) return new BoardRouteManager.RouteChange(4, 2);
+
+        if ((route == 3) && (pos == 4)) return new BoardRouteManager.RouteChange(4, 1);
+        if ((route == 3) && (pos == 5)) return new BoardRouteManager.RouteChange(4, 2);
+
+
+        if ((route == 4) && pos > 2) return new BoardRouteManager.RouteChange(0, pos+17);
+        if ((route == 5) && pos > 2) return new BoardRouteManager.RouteChange(0, pos+22);
         return null;
     }
 
     @Override
     public int getRouteLength(int route) {
         return switch (route) {
-            case 0 -> 31; // 외곽 경로
+            case 0 -> 26; // 외곽 경로
             case 1, 2, 3 -> 6; // 대각선 (중심으로 이어짐)
-            case 4, 5 -> 3; // 중심선
-            default -> 31;
+            case 4, 5 -> 4; // 중심선
+            default -> 26;
         };
     }
 

@@ -15,9 +15,9 @@ public class SquareBoardRouteManager implements IBoardRouteManager {
     @Override
     public int getRouteLength(int route) {
         return switch (route) {
-            case 0 -> 20;
+            case 0 -> 21;
             case 1, 2 -> 6;
-            default -> 20;
+            default -> 21;
         };
     }
 
