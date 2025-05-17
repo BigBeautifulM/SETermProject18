@@ -59,4 +59,3 @@ public class Piece {
         return String.format("[R%d:%d, %d개]", routeIndex, positionIndex, point);
     }
 }
-

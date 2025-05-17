@@ -631,4 +631,3 @@ public class YootBoard extends JFrame {
         return turnLabel;
     }
 }
-
