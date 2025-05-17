@@ -28,17 +28,17 @@ public class PentBoardRouteManager implements IBoardRouteManager {
 
 
         if ((route == 4) && pos > 2) return new BoardRouteManager.RouteChange(0, pos+17);
-        if ((route == 5) && pos > 2) return new BoardRouteManager.RouteChange(0, pos+23);
+        if ((route == 5) && pos > 2) return new BoardRouteManager.RouteChange(0, pos+22);
         return null;
     }
 
     @Override
     public int getRouteLength(int route) {
         return switch (route) {
-            case 0 -> 25; // 외곽 경로
+            case 0 -> 26; // 외곽 경로
             case 1, 2, 3 -> 6; // 대각선 (중심으로 이어짐)
             case 4, 5 -> 4; // 중심선
-            default -> 25;
+            default -> 26;
         };
     }
 

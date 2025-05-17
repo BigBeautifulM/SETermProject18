@@ -77,7 +77,11 @@ public class Player {
         Iterator<Piece> it = pieces.iterator();
         while (it.hasNext()) {
             Piece piece = it.next();
+            System.out.println("[DEBUG] After move: " + piece);
             if (piece.hasArrived()) {
+                System.out.println("[DEBUG] Piece arrived at or beyond finish: " +
+                        "[route=" + piece.getRouteIndex() +
+                        ", position=" + piece.getPositionIndex() + "]");
                 score += piece.getPoint();
                 it.remove();
                 return true;
