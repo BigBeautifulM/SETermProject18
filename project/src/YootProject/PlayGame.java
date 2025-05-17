@@ -1,6 +1,5 @@
 package YootProject;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -222,7 +221,7 @@ public class PlayGame implements ActionListener {
 
     private boolean checkWinner() {
         Player player = players.get(turn);
-        if (player.getScore() >= config.getPieceNum()) {
+        if (player.getScore() == config.getPieceNum()) {
             winner = turn;
             board.showWinner("Player " + (turn + 1) + " 승리!");// 또는 승자 정보를 넣어도 됨
             return true;
