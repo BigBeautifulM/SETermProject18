@@ -14,16 +14,16 @@ public class PentBoardRouteManager implements IBoardRouteManager {
         }
 
         if (route == 1) {
-            if (pos == 3) return new BoardRouteManager.RouteChange(4, 0);
-            if (pos >= 4) return new BoardRouteManager.RouteChange(5, 0);
+            if (pos == 3) return new BoardRouteManager.RouteChange(5, 0);
+            if (pos >= 4) return new BoardRouteManager.RouteChange(4, 0);
         }
         if (route == 2) {
-            if (pos == 3) return new BoardRouteManager.RouteChange(4, 0);
-            if (pos >= 4) return new BoardRouteManager.RouteChange(5, 0);
+            if (pos == 3) return new BoardRouteManager.RouteChange(5, 0);
+            if (pos >= 4) return new BoardRouteManager.RouteChange(4, 0);
         }
         if (route == 3) {
-            if (pos == 3) return new BoardRouteManager.RouteChange(4, 0);
-            if (pos >= 4) return new BoardRouteManager.RouteChange(5, 0);
+            if (pos == 3) return new BoardRouteManager.RouteChange(5, 0);
+            if (pos >= 4) return new BoardRouteManager.RouteChange(4, 0);
         }
         if (route == 4 || route == 5) {
             if (pos == 3) {
@@ -52,7 +52,7 @@ public class PentBoardRouteManager implements IBoardRouteManager {
 
     @Override
     public int getStartPosition() {
-        return 25; // 출발 지점 인덱스 (pointsPenta의 4번, panButton[0][25])
+        return 0; // 출발 지점 인덱스 (pointsPenta의 4번, panButton[0][25])
     }
 
     @Override
