@@ -220,11 +220,13 @@ public class PlayGame implements ActionListener {
     }
 
     private boolean checkWinner() {
-        Player player = players.get(turn);
-        if (player.getScore() == config.getPieceNum()) {
-            winner = turn;
-            board.showWinner("Player " + (turn + 1) + " 승리!");// 또는 승자 정보를 넣어도 됨
-            return true;
+        for (int i = 0; i < players.size(); i++) {
+            Player p = players.get(i);
+            if (p.getScore() == config.getPieceNum()) {
+                winner = i;
+                board.showWinner("Player " + (i + 1) + " 승리!");
+                return true;
+            }
         }
         return false;
     }
