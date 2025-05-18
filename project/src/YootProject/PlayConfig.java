@@ -4,6 +4,7 @@ public class PlayConfig {
     private int playerNum;
     private int pieceNum;
     private int boardShape;
+
     public int getPlayerNum() {
         return playerNum;
     }
@@ -27,5 +28,7 @@ public class PlayConfig {
     public int getBoardShape() {
        return boardShape;
     }
+
+
 
 }
