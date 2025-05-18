@@ -398,12 +398,12 @@ public class YootBoard extends JFrame {
                         new Point(320, 373), new Point(340, 339), new Point(360, 304), new Point(380, 269), new Point(400, 235),
                         new Point(420, 200),
                         // 내부 대각선 경로 및 중심 (1~6번 라인)
-                        new Point(320, 27), new Point(287, 84), new Point(253, 143),         // route 1
-                        new Point(120, 27), new Point(153, 84), new Point(187, 143),         // route 2
-                        new Point(20, 200), new Point(87, 200), new Point(153, 200),         // route 3
+                        new Point(320, 27), new Point(287, 84), new Point(253, 143), new Point(220, 200),        // route 1
+                        new Point(120, 27), new Point(153, 84), new Point(187, 143), new Point(220, 200),        // route 2
+                        new Point(20, 200), new Point(87, 200), new Point(153, 200), new Point(220, 200),        // route 3
                         new Point(120, 373), new Point(153, 316), new Point(187, 257), new Point(220, 200),       // route 4
-                        new Point(320, 373), new Point(287, 316), new Point(253, 257),       // route 5
-                        new Point(420, 200), new Point(353, 200), new Point(287, 200)       // route 6
+                        new Point(220, 200), new Point(253, 257), new Point(287, 316), new Point(320, 373),       // route 5
+                        new Point(220, 200), new Point(287, 200), new Point(353, 200), new Point(420, 200)       // route 6
                 );
 
                 // 외곽 route 0: 0~30까지 총 31칸
@@ -427,12 +427,12 @@ public class YootBoard extends JFrame {
 
                 // route 1~6 내부 라인 구성
                 int[][] routeOffsets = {
-                        {31, 3}, // route 1
-                        {34, 3}, // route 2
-                        {37, 3}, // route 3
-                        {40, 4}, // route 4
-                        {44, 3}, // route 5
-                        {47, 3}  // route 6
+                        {31, 4}, // route 1
+                        {35, 4}, // route 2
+                        {39, 4}, // route 3
+                        {43, 4}, // route 4
+                        {47, 4}, // route 5
+                        {51, 4}  // route 6
                 };
 
                 for (int r = 1; r <= 6; r++) {
