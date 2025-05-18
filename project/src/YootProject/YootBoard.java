@@ -380,7 +380,7 @@ public class YootBoard extends JFrame {
 
             case 6:
                 line = new JLabel(new ImageIcon("project/img/sixline.png"));
-                line.setBounds(30, 20, 400, 400);
+                line.setBounds(15, 00, 400, 400);
                 line.setVisible(true);
 
                 panButton = new JButton[7][43]; // routeIndex 0: 외곽, 1~6: 대각선 및 중심 경로
@@ -390,30 +390,33 @@ public class YootBoard extends JFrame {
 
                 List<Point> pointsHexa = Arrays.asList(
                         // 외곽 경로 (route 0)
-                        new Point(420, 200), new Point(400, 165), new Point(380, 131), new Point(360, 96),
-                        new Point(340, 61), new Point(320, 27), new Point(280, 27), new Point(240, 27),
-                        new Point(200, 27), new Point(160, 27), new Point(120, 27), new Point(100, 61),
-                        new Point(80, 96), new Point(60, 131), new Point(40, 165), new Point(20, 200),
-                        new Point(40, 235), new Point(60, 269), new Point(80, 304), new Point(100, 339),
-                        new Point(120, 373), new Point(160, 373), new Point(200, 373), new Point(240, 373),
-                        new Point(280, 373), new Point(320, 373), new Point(340, 339), new Point(360, 304),
-                        new Point(380, 269), new Point(400, 235), new Point(420, 200),
+                        new Point(420, 200), new Point(400, 165), new Point(380, 131), new Point(360, 96), new Point(340, 61),
+                        new Point(320, 27), new Point(280, 27), new Point(240, 27), new Point(200, 27), new Point(160, 27),
+                        new Point(120, 27), new Point(100, 61), new Point(80, 96), new Point(60, 131), new Point(40, 165),
+                        new Point(20, 200), new Point(40, 235), new Point(60, 269), new Point(80, 304), new Point(100, 339),
+                        new Point(120, 373), new Point(160, 373), new Point(200, 373), new Point(240, 373), new Point(280, 373),
+                        new Point(320, 373), new Point(340, 339), new Point(360, 304), new Point(380, 269), new Point(400, 235),
 
                         // 내부 대각선 경로 및 중심 (1~6번 라인)
-                        new Point(320, 27), new Point(287, 84), new Point(253, 143), new Point(220, 200),         // route 1
-                        new Point(120, 27), new Point(153, 84), new Point(187, 143), new Point(220, 200),         // route 2
-                        new Point(20, 200), new Point(87, 200), new Point(153, 200), new Point(220, 200),         // route 3
-                        new Point(220, 200), new Point(253, 257), new Point(287, 316), new Point(220, 373), new Point(220, 200), // route 4
-                        new Point(120, 373), new Point(153, 316), new Point(187, 257), new Point(220, 200),       // route 5
-                        new Point(320, 373), new Point(287, 316), new Point(253, 257), new Point(220, 200)        // route 6
+                        new Point(320, 27), new Point(287, 84), new Point(253, 143),         // route 1
+                        new Point(120, 27), new Point(153, 84), new Point(187, 143),         // route 2
+                        new Point(20, 200), new Point(87, 200), new Point(153, 200),         // route 3
+                        new Point(120, 373), new Point(153, 316), new Point(187, 257), new Point(220, 200),       // route 4
+                        new Point(320, 373), new Point(287, 316), new Point(253, 257),       // route 5
+                        new Point(420, 200), new Point(353, 200), new Point(287, 200)       // route 6
                 );
 
-                // 외곽 route 0: 0~30까지 총 31칸
-                for (int i = 0; i < 31; i++) {
+                // 외곽 route 0: 0~29까지 총 30칸
+                for (int i = 0; i < 30; i++) {
                     Point pt = pointsHexa.get(i);
-                    ImageIcon icon = (i == 0 || i == 5 || i == 10 || i == 20 || i == 25 || i == 30)
-                            ? new ImageIcon("project/img/bigcircle.jpg")
-                            : new ImageIcon("project/img/circle.jpg");
+                    ImageIcon icon;
+                    if(i==0){
+                        icon = new ImageIcon("project/img/startcircle.jpg");
+                    }
+                    else if(i == 5 || i == 10 || i == 20 || i == 25){
+                        icon = new ImageIcon("project/img/bigcircle.jpg");
+                    }
+                    else icon = new ImageIcon("project/img/circle.jpg");
 
                     panButton[0][i] = new JButton(icon);
                     panButton[0][i].setBounds(pt.x - buttonSizeX / 2, pt.y - buttonSizeY / 2, buttonSizeX, buttonSizeY);
@@ -424,12 +427,12 @@ public class YootBoard extends JFrame {
 
                 // route 1~6 내부 라인 구성
                 int[][] routeOffsets = {
-                        {31, 4}, // route 1
-                        {35, 4}, // route 2
-                        {39, 4}, // route 3
-                        {43, 5}, // route 4
-                        {48, 4}, // route 5
-                        {52, 4}  // route 6
+                        {30, 3}, // route 1
+                        {33, 3}, // route 2
+                        {36, 3}, // route 3
+                        {39, 4}, // route 4
+                        {43, 3}, // route 5
+                        {46, 3}  // route 6
                 };
 
                 for (int r = 1; r <= 6; r++) {
@@ -437,10 +440,7 @@ public class YootBoard extends JFrame {
                     int len = routeOffsets[r - 1][1];
                     for (int i = 0; i < len; i++) {
                         Point pt = pointsHexa.get(offset + i);
-                        // 중복되는 중심 좌표(220, 200)는 route 4 외에는 건너뜀
-                        if (pt.equals(new Point(220, 200)) && r != 4) {
-                            continue; // 중복 버튼 방지
-                        }
+
                         ImageIcon icon = (i == len - 1) ? new ImageIcon("project/img/bigcircle.jpg") : new ImageIcon("project/img/circle.jpg");
 
                         panButton[r][i] = new JButton(icon);
