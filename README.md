@@ -19,3 +19,11 @@
 - 중앙의 이중 원 위에 위치하지 않고 지나칠 경우 말은 2번째 최단 경로에 해당하는 곳으로 이동해야 한다.
 
 ![판 위에서의 규칙](https://github.com/BigBeautifulM/SETermProject18/blob/master/project/img/readme.png)
+
+## Team Members
+
+- 김찬중 (202##780)
+- 박민용 (202##113)
+- 엄태형 (202##029)
+- 이정우 (202##021)
+- 태아카 (202##483)
