@@ -1,6 +1,6 @@
 # SE Team Project 18
 
-## 프로젝트 개요
+## Project Introduction
 
 ### (1) 윷놀이 규칙 (말, 참여자, 윷놀이 이동)
 
