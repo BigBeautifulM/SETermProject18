@@ -65,14 +65,17 @@ public class YootBoard extends JFrame {
                         xpos += buttonInterval;
                     }
 
-                    if (i == 20 || i == 15) {
+                    if (i == 15) {
                         panButton[0][i] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
                     } else if (i == 5) {
                         panButton[1][0] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
                     }
                     else if(i==10){
                         panButton[2][0] = new JButton(new ImageIcon("project/img/bigcircle.jpg"));
-                    }else {
+                    }else if(i == 20){
+                        panButton[0][i] = new JButton(new ImageIcon("project/img/startcircle.jpg"));
+                    }
+                    else {
                         panButton[0][i] = new JButton(new ImageIcon("project/img/circle.jpg"));
                     }
 
@@ -200,8 +203,8 @@ public class YootBoard extends JFrame {
                     ImageIcon icon;
 
                     if(i<6){
-                        icon = new ImageIcon("project/img/bigcircle.jpg");
                         if(i==0){
+                            icon = new ImageIcon("project/img/bigcircle.jpg");
 
                             panButton[1][0] = new JButton(icon);
                             panButton[1][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
@@ -210,6 +213,7 @@ public class YootBoard extends JFrame {
                             panelPan.add(panButton[1][0]);
                         }
                         else if(i==1){
+                            icon = new ImageIcon("project/img/bigcircle.jpg");
 
                             panButton[2][0] = new JButton(icon);
                             panButton[2][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
@@ -218,6 +222,7 @@ public class YootBoard extends JFrame {
                             panelPan.add(panButton[2][0]);
                         }
                         else if(i==2){
+                            icon = new ImageIcon("project/img/bigcircle.jpg");
 
                             panButton[3][0] = new JButton(icon);
                             panButton[3][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
@@ -226,6 +231,7 @@ public class YootBoard extends JFrame {
                             panelPan.add(panButton[3][0]);
                         }
                         else if(i==3){
+                            icon = new ImageIcon("project/img/bigcircle.jpg");
 
                             panButton[0][20] = new JButton(icon);
                             panButton[0][20].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
@@ -234,6 +240,7 @@ public class YootBoard extends JFrame {
                             panelPan.add(panButton[0][20]);
                         }
                         else if(i==4){
+                            icon = new ImageIcon("project/img/startcircle.jpg");
 
                             panButton[0][25] = new JButton(icon);
                             panButton[0][25].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
@@ -242,6 +249,7 @@ public class YootBoard extends JFrame {
                             panelPan.add(panButton[0][25]);
                         }
                         else{
+                            icon = new ImageIcon("project/img/bigcircle.jpg");
 
                             panButton[5][0] = new JButton(icon);
                             panButton[5][0].setBounds(x.x - buttonSizeX/2, x.y - buttonSizeY/2, buttonSizeX, buttonSizeY);
