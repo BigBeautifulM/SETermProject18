@@ -5,13 +5,19 @@ public class PlayConfig {
     private int pieceNum;
     private int boardShape;
 
-    public int getPlayerNum() {
-        return playerNum;
+    public PlayConfig(int playerNum, int pieceNum, int boardShape) {
+        this.playerNum = playerNum;
+        this.pieceNum = pieceNum;
+        this.boardShape = boardShape;
     }
+
     public PlayConfig() {
         playerNum = 2;
         pieceNum = 2;
         boardShape=4;
+    }
+    public int getPlayerNum() {
+        return playerNum;
     }
     public void setPlayerNum(int playerNum) {
         this.playerNum = playerNum;
@@ -28,7 +34,5 @@ public class PlayConfig {
     public int getBoardShape() {
        return boardShape;
     }
-
-
 
 }

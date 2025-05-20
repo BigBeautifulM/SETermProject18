@@ -54,6 +54,10 @@ public class Piece {
         this.positionIndex = pos;
     }
 
+    public IBoardRouteManager getRouteManager() {
+        return this.routeManager;
+    }
+
     @Override
     public String toString() {
         return String.format("[R%d:%d, %d개]", routeIndex, positionIndex, point);

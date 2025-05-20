@@ -312,6 +312,10 @@ public class PlayGame implements ActionListener {
 
     }
 
+    public List<Player> getPlayers() {
+        return players;
+    }
+
     public boolean didSomeoneWin() {
         return checkWinner();  // 내부에서 private 메서드 호출
     }
