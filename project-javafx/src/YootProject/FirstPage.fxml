@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Game Configuration" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <GridPane alignment="CENTER" layoutX="9.6" layoutY="50.0" prefHeight="376.8" prefWidth="598.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" text="Number of Player" />
+                  <Label text="Number of Pieces" GridPane.rowIndex="1" />
+                  <Label text="Shape of  Board" GridPane.rowIndex="2" />
+                  <RadioButton alignment="BOTTOM_LEFT" contentDisplay="CENTER" mnemonicParsing="false" selected="true" text="Square" userData="4" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="boardNum" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton mnemonicParsing="false" text="Pentagon" userData="5" toggleGroup="$boardNum" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <RadioButton mnemonicParsing="false" text="Hexagon" userData="6" toggleGroup="$boardNum" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <RadioButton mnemonicParsing="false" selected="true" userData="2" text="2" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="pieceNum" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton mnemonicParsing="false" text="3" userData="3" toggleGroup="$pieceNum" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <RadioButton mnemonicParsing="false" text="4" userData="4" toggleGroup="$pieceNum" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <RadioButton mnemonicParsing="false" text="5" userData="5" toggleGroup="$pieceNum" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <RadioButton mnemonicParsing="false" selected="true" text="2" userData="2" GridPane.columnIndex="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="playerNum" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" text="3" userData="3" toggleGroup="$playerNum" GridPane.columnIndex="2" />
+                  <RadioButton mnemonicParsing="false" text="4" userData="4" toggleGroup="$playerNum" GridPane.columnIndex="3" />
+                  <Button mnemonicParsing="false" text="Start" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </children></AnchorPane>
+  </content>
+</TitledPane>
