@@ -621,7 +621,7 @@ public class YootBoard extends JFrame {
         }
     }
     public void showWinner(String winner){
-
+        JOptionPane.showMessageDialog(this, winner, "게임 종료", JOptionPane.INFORMATION_MESSAGE);
     }
     public void showThrowResult(String result) {
         if (randomResult != null) {
