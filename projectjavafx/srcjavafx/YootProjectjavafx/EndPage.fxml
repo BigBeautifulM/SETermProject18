@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" text="Thanks for Playing" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane fx:id="endPage" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" layoutX="36.0" layoutY="10.0" prefHeight="155.0" prefWidth="326.0">
+               <children>
+                  <Button fx:id="restartBtn" mnemonicParsing="false" onAction="#handleRestart" prefHeight="50.0" prefWidth="100.0" text="재시작">
+                     <font>
+                        <Font name="Gulim" size="18.0" />
+                     </font></Button>
+                  <Button fx:id="exitBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="종료">
+                     <font>
+                        <Font name="Gulim" size="18.0" />
+                     </font></Button>
+               </children>
+            </FlowPane>
+         </children></AnchorPane>
+  </content>
+</TitledPane>
