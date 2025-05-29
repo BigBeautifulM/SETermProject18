@@ -13,13 +13,17 @@ public class EndPagefxController {
     @FXML
     private AnchorPane endPage;
 
-    public EndPagefxController(EndPagefx endpage){this.page = endpage;}
+    public EndPagefxController(){}
+
+    public void setBoard(EndPagefx endpage){
+        this.page = endpage;
+    }
 
     @FXML
     private void handleRestart(ActionEvent e){
         Stage stage = (Stage) endPage.getScene().getWindow();
         stage.close();
-        new FirstPagefx();
+        FirstPagefx.showFirstPage();
     }
 
     @FXML

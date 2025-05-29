@@ -27,6 +27,7 @@ import java.io.IOException;
 
 public class YootBoardfx extends TitledPane {
     private YootBoardfxController controller;
+    private Stage stage;
 
     public YootBoardfx(int playerNum, int pieceNum, int boardNum){
         try{
@@ -34,7 +35,7 @@ public class YootBoardfx extends TitledPane {
             Parent root = loader.load();
             controller = loader.getController();
             controller.initBoard(playerNum,pieceNum,boardNum);
-            Stage stage = new Stage();
+            stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -44,5 +45,9 @@ public class YootBoardfx extends TitledPane {
 
     public YootBoardfxController getController(){
         return controller;
+    }
+
+    public Stage getStage(){
+        return stage;
     }
 }

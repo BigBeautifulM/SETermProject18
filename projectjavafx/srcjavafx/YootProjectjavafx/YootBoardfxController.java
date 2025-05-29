@@ -234,11 +234,10 @@ public class YootBoardfxController {
             case 5:
                 image = new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/fiveline.png"));
                 line.setGraphic(new ImageView(image));
-                line.setLayoutX(30);
-                line.setLayoutY(30);
+                line.setLayoutX(10);
+                line.setLayoutY(5);
                 line.setPrefWidth(350);
                 line.setPrefHeight(350);
-                line.setVisible(true);
                 boardPane.getChildren().add(line);
 
                 panButton = new Button[6][36];
@@ -298,8 +297,8 @@ public class YootBoardfxController {
 
                             panButton[1][0] = new Button();
                             panButton[1][0].setGraphic(new ImageView(icon));
-                            panButton[1][0].setLayoutX(x.x - buttonSizeX/2);
-                            panButton[1][0].setLayoutY(x.y - buttonSizeY/2);
+                            panButton[1][0].setLayoutX(x.x - buttonSizeX);
+                            panButton[1][0].setLayoutY(x.y - buttonSizeY);
                             panButton[1][0].setPrefWidth(buttonSizeX);
                             panButton[1][0].setPrefHeight(buttonSizeY);
                             panButton[1][0].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -311,8 +310,8 @@ public class YootBoardfxController {
 
                             panButton[2][0] = new Button();
                             panButton[2][0].setGraphic(new ImageView(icon));
-                            panButton[2][0].setLayoutX(x.x - buttonSizeX/2);
-                            panButton[2][0].setLayoutY(x.y - buttonSizeY/2);
+                            panButton[2][0].setLayoutX(x.x - buttonSizeX);
+                            panButton[2][0].setLayoutY(x.y - buttonSizeY);
                             panButton[2][0].setPrefWidth(buttonSizeX);
                             panButton[2][0].setPrefHeight(buttonSizeY);
                             panButton[2][0].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -324,8 +323,8 @@ public class YootBoardfxController {
 
                             panButton[3][0] = new Button();
                             panButton[3][0].setGraphic(new ImageView(icon));
-                            panButton[3][0].setLayoutX(x.x - buttonSizeX/2);
-                            panButton[3][0].setLayoutY(x.y - buttonSizeY/2);
+                            panButton[3][0].setLayoutX(x.x - buttonSizeX);
+                            panButton[3][0].setLayoutY(x.y - buttonSizeY);
                             panButton[3][0].setPrefWidth(buttonSizeX);
                             panButton[3][0].setPrefHeight(buttonSizeY);
                             panButton[3][0].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -337,8 +336,8 @@ public class YootBoardfxController {
 
                             panButton[0][20] = new Button();
                             panButton[0][20].setGraphic(new ImageView(icon));
-                            panButton[0][20].setLayoutX(x.x - buttonSizeX/2);
-                            panButton[0][20].setLayoutY(x.y - buttonSizeY/2);
+                            panButton[0][20].setLayoutX(x.x - buttonSizeX);
+                            panButton[0][20].setLayoutY(x.y - buttonSizeY);
                             panButton[0][20].setPrefWidth(buttonSizeX);
                             panButton[0][20].setPrefHeight(buttonSizeY);
                             panButton[0][20].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -350,8 +349,8 @@ public class YootBoardfxController {
 
                             panButton[0][25] = new Button();
                             panButton[0][25].setGraphic(new ImageView(icon));
-                            panButton[0][25].setLayoutX(x.x - buttonSizeX/2);
-                            panButton[0][25].setLayoutY(x.y - buttonSizeY/2);
+                            panButton[0][25].setLayoutX(x.x - buttonSizeX);
+                            panButton[0][25].setLayoutY(x.y - buttonSizeY);
                             panButton[0][25].setPrefWidth(buttonSizeX);
                             panButton[0][25].setPrefHeight(buttonSizeY);
                             panButton[0][25].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -363,8 +362,8 @@ public class YootBoardfxController {
 
                             panButton[5][0] = new Button();
                             panButton[5][0].setGraphic(new ImageView(icon));
-                            panButton[5][0].setLayoutX(x.x - buttonSizeX/2);
-                            panButton[5][0].setLayoutY(x.y - buttonSizeY/2);
+                            panButton[5][0].setLayoutX(x.x - buttonSizeX);
+                            panButton[5][0].setLayoutY(x.y - buttonSizeY);
                             panButton[5][0].setPrefWidth(buttonSizeX);
                             panButton[5][0].setPrefHeight(buttonSizeY);
                             panButton[5][0].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -440,89 +439,89 @@ public class YootBoardfxController {
                             }
                             else if(k==1){
                                 if(i==26||i==27){
-                                    panButton[0][i-25] = new Button();
-                                    panButton[0][i-25].setGraphic(new ImageView(icon));
-                                    panButton[0][i-25].setLayoutX(x.x - buttonSizeX/2);
-                                    panButton[0][i-25].setLayoutY(x.y - buttonSizeY/2);
-                                    panButton[0][i-25].setPrefWidth(buttonSizeX);
-                                    panButton[0][i-25].setPrefHeight(buttonSizeY);
-                                    panButton[0][i-25].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+                                    panButton[k][i-25] = new Button();
+                                    panButton[k][i-25].setGraphic(new ImageView(icon));
+                                    panButton[k][i-25].setLayoutX(x.x - buttonSizeX/2);
+                                    panButton[k][i-25].setLayoutY(x.y - buttonSizeY/2);
+                                    panButton[k][i-25].setPrefWidth(buttonSizeX);
+                                    panButton[k][i-25].setPrefHeight(buttonSizeY);
+                                    panButton[k][i-25].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
-                                    boardPane.getChildren().add(panButton[0][i-25]);
+                                    boardPane.getChildren().add(panButton[k][i-25]);
                                 }
                             }
                             else if(k==2){
                                 if(i==28||i==29){
-                                    panButton[0][i-27] = new Button();
-                                    panButton[0][i-27].setGraphic(new ImageView(icon));
-                                    panButton[0][i-27].setLayoutX(x.x - buttonSizeX/2);
-                                    panButton[0][i-27].setLayoutY(x.y - buttonSizeY/2);
-                                    panButton[0][i-27].setPrefWidth(buttonSizeX);
-                                    panButton[0][i-27].setPrefHeight(buttonSizeY);
-                                    panButton[0][i-27].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+                                    panButton[k][i-27] = new Button();
+                                    panButton[k][i-27].setGraphic(new ImageView(icon));
+                                    panButton[k][i-27].setLayoutX(x.x - buttonSizeX/2);
+                                    panButton[k][i-27].setLayoutY(x.y - buttonSizeY/2);
+                                    panButton[k][i-27].setPrefWidth(buttonSizeX);
+                                    panButton[k][i-27].setPrefHeight(buttonSizeY);
+                                    panButton[k][i-27].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
-                                    boardPane.getChildren().add(panButton[0][i-27]);
+                                    boardPane.getChildren().add(panButton[k][i-27]);
                                 }
                             }
                             else if(k==3){
                                 if(i==30||i==31){
-                                    panButton[0][i-29] = new Button();
-                                    panButton[0][i-29].setGraphic(new ImageView(icon));
-                                    panButton[0][i-29].setLayoutX(x.x - buttonSizeX/2);
-                                    panButton[0][i-29].setLayoutY(x.y - buttonSizeY/2);
-                                    panButton[0][i-29].setPrefWidth(buttonSizeX);
-                                    panButton[0][i-29].setPrefHeight(buttonSizeY);
-                                    panButton[0][i-29].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+                                    panButton[k][i-29] = new Button();
+                                    panButton[k][i-29].setGraphic(new ImageView(icon));
+                                    panButton[k][i-29].setLayoutX(x.x - buttonSizeX/2);
+                                    panButton[k][i-29].setLayoutY(x.y - buttonSizeY/2);
+                                    panButton[k][i-29].setPrefWidth(buttonSizeX);
+                                    panButton[k][i-29].setPrefHeight(buttonSizeY);
+                                    panButton[k][i-29].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
-                                    boardPane.getChildren().add(panButton[0][i-29]);
+                                    boardPane.getChildren().add(panButton[k][i-29]);
                                 }
                             }
                             else if(k==4){
                                 if(i==33){
-                                    panButton[0][i-32] = new Button();
-                                    panButton[0][i-32].setGraphic(new ImageView(icon));
-                                    panButton[0][i-32].setLayoutX(x.x - buttonSizeX/2);
-                                    panButton[0][i-32].setLayoutY(x.y - buttonSizeY/2);
-                                    panButton[0][i-32].setPrefWidth(buttonSizeX);
-                                    panButton[0][i-32].setPrefHeight(buttonSizeY);
-                                    panButton[0][i-32].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+                                    panButton[k][i-32] = new Button();
+                                    panButton[k][i-32].setGraphic(new ImageView(icon));
+                                    panButton[k][i-32].setLayoutX(x.x - buttonSizeX/2);
+                                    panButton[k][i-32].setLayoutY(x.y - buttonSizeY/2);
+                                    panButton[k][i-32].setPrefWidth(buttonSizeX);
+                                    panButton[k][i-32].setPrefHeight(buttonSizeY);
+                                    panButton[k][i-32].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
-                                    boardPane.getChildren().add(panButton[0][i-32]);
+                                    boardPane.getChildren().add(panButton[k][i-32]);
                                 }
                                 if(i==32){
-                                    panButton[0][i-30] = new Button();
-                                    panButton[0][i-30].setGraphic(new ImageView(icon));
-                                    panButton[0][i-30].setLayoutX(x.x - buttonSizeX/2);
-                                    panButton[0][i-30].setLayoutY(x.y - buttonSizeY/2);
-                                    panButton[0][i-30].setPrefWidth(buttonSizeX);
-                                    panButton[0][i-30].setPrefHeight(buttonSizeY);
-                                    panButton[0][i-30].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+                                    panButton[k][i-30] = new Button();
+                                    panButton[k][i-30].setGraphic(new ImageView(icon));
+                                    panButton[k][i-30].setLayoutX(x.x - buttonSizeX/2);
+                                    panButton[k][i-30].setLayoutY(x.y - buttonSizeY/2);
+                                    panButton[k][i-30].setPrefWidth(buttonSizeX);
+                                    panButton[k][i-30].setPrefHeight(buttonSizeY);
+                                    panButton[k][i-30].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
-                                    boardPane.getChildren().add(panButton[0][i-30]);
+                                    boardPane.getChildren().add(panButton[k][i-30]);
                                 }
                             }
                             else {
                                 if(i==35){
-                                    panButton[0][i-34] = new Button();
-                                    panButton[0][i-34].setGraphic(new ImageView(icon));
-                                    panButton[0][i-34].setLayoutX(x.x - buttonSizeX/2);
-                                    panButton[0][i-34].setLayoutY(x.y - buttonSizeY/2);
-                                    panButton[0][i-34].setPrefWidth(buttonSizeX);
-                                    panButton[0][i-34].setPrefHeight(buttonSizeY);
-                                    panButton[0][i-34].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+                                    panButton[k][i-34] = new Button();
+                                    panButton[k][i-34].setGraphic(new ImageView(icon));
+                                    panButton[k][i-34].setLayoutX(x.x - buttonSizeX/2);
+                                    panButton[k][i-34].setLayoutY(x.y - buttonSizeY/2);
+                                    panButton[k][i-34].setPrefWidth(buttonSizeX);
+                                    panButton[k][i-34].setPrefHeight(buttonSizeY);
+                                    panButton[k][i-34].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
-                                    boardPane.getChildren().add(panButton[0][i-34]);
+                                    boardPane.getChildren().add(panButton[k][i-34]);
                                 }
                                 if(i==34){
-                                    panButton[0][i-32] = new Button();
-                                    panButton[0][i-32].setGraphic(new ImageView(icon));
-                                    panButton[0][i-32].setLayoutX(x.x - buttonSizeX/2);
-                                    panButton[0][i-32].setLayoutY(x.y - buttonSizeY/2);
-                                    panButton[0][i-32].setPrefWidth(buttonSizeX);
-                                    panButton[0][i-32].setPrefHeight(buttonSizeY);
-                                    panButton[0][i-32].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
+                                    panButton[k][i-32] = new Button();
+                                    panButton[k][i-32].setGraphic(new ImageView(icon));
+                                    panButton[k][i-32].setLayoutX(x.x - buttonSizeX/2);
+                                    panButton[k][i-32].setLayoutY(x.y - buttonSizeY/2);
+                                    panButton[k][i-32].setPrefWidth(buttonSizeX);
+                                    panButton[k][i-32].setPrefHeight(buttonSizeY);
+                                    panButton[k][i-32].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
 
-                                    boardPane.getChildren().add(panButton[0][i-32]);
+                                    boardPane.getChildren().add(panButton[k][i-32]);
                                 }
 
                             }
@@ -571,18 +570,24 @@ public class YootBoardfxController {
                 for (int i = 0; i < 31; i++) {
                     Point pt = pointsHexa.get(i);
                     Image icon;
+                    panButton[0][i] = new Button();
                     if(i==30 || i == 0){
                         icon = new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/startcircle.jpg"));
+                        panButton[0][i].setLayoutX(pt.x - buttonSizeX);
+                        panButton[0][i].setLayoutY(pt.y - buttonSizeY);
                     }
                     else if(i == 5 || i == 10 || i==15 || i == 20 || i == 25){
                         icon = new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/bigcircle.jpg"));
+                        panButton[0][i].setLayoutX(pt.x - buttonSizeX);
+                        panButton[0][i].setLayoutY(pt.y - buttonSizeY);
                     }
-                    else icon = new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/circle.jpg"));
+                    else {
+                        icon = new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/circle.jpg"));
+                        panButton[0][i].setLayoutX(pt.x - buttonSizeX/2);
+                        panButton[0][i].setLayoutY(pt.y - buttonSizeY/2);
+                    }
 
-                    panButton[0][i] = new Button();
                     panButton[0][i].setGraphic(new ImageView(icon));
-                    panButton[0][i].setLayoutX(pt.x - buttonSizeX / 2);
-                    panButton[0][i].setLayoutY(pt.y - buttonSizeY / 2);
                     panButton[0][i].setPrefWidth(buttonSizeX);
                     panButton[0][i].setPrefHeight(buttonSizeY);
                     panButton[0][i].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -606,19 +611,23 @@ public class YootBoardfxController {
                     for (int i = 0; i < len; i++) {
                         Point pt = pointsHexa.get(offset + i);
                         Image icon;
+                        panButton[r][i] = new Button();
                         if(i==3&&r == 6){
                             icon = new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/startcircle.jpg"));
+                            panButton[r][i].setLayoutX(pt.x - buttonSizeX);
+                            panButton[r][i].setLayoutY(pt.y - buttonSizeY);
                         }else if(i == 0 || i == 3){
                             icon = new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/bigcircle.jpg"));
+                            panButton[r][i].setLayoutX(pt.x - buttonSizeX);
+                            panButton[r][i].setLayoutY(pt.y - buttonSizeY);
                         }
                         else{
                             icon = (i == len - 1) ? new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/bigcircle.jpg")) : new Image(getClass().getResourceAsStream("/YootProjectjavafx/img/circle.jpg"));
+                            panButton[r][i].setLayoutX(pt.x - buttonSizeX / 2);
+                            panButton[r][i].setLayoutY(pt.y - buttonSizeY / 2);
                         }
 
-                        panButton[r][i] = new Button();
                         panButton[r][i].setGraphic(new ImageView(icon));
-                        panButton[r][i].setLayoutX(pt.x - buttonSizeX / 2);
-                        panButton[r][i].setLayoutY(pt.y - buttonSizeY / 2);
                         panButton[r][i].setPrefWidth(buttonSizeX);
                         panButton[r][i].setPrefHeight(buttonSizeY);
                         panButton[r][i].setStyle("-fx-background-color: transparent; -fx-border-color: transparent;");
@@ -693,7 +702,6 @@ public class YootBoardfxController {
         alert.setHeaderText(null);
         alert.setContentText(winner);
         alert.showAndWait();
-
     }
 
     public void showThrowResult(String result) {

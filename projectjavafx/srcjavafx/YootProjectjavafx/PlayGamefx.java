@@ -144,8 +144,7 @@ public class PlayGamefx {
         if (checkWinner()) {
             System.out.println("게임 종료 → Player " + (turn + 1) + " 승리!");
             new EndPagefx();
-            Stage stage=(Stage) board.getScene().getWindow();
-            stage.close();
+            board.getStage().close();
             return;
         }
         selectedStackValue = null;
@@ -196,8 +195,7 @@ public class PlayGamefx {
         if (checkWinner()) {
             System.out.println("게임 종료 → Player " + (turn + 1) + " 승리!");
             new EndPagefx();
-            Stage stage=(Stage) board.getScene().getWindow();
-            stage.close();
+            board.getStage().close();
             return;
         }
         selectedStackValue = null;
@@ -213,8 +211,7 @@ public class PlayGamefx {
             if (checkWinner()) {
                 System.out.println("게임 종료 → Player " + (turn + 1) + " 승리!");
                 new EndPagefx();
-                Stage stage=(Stage) board.getScene().getWindow();
-                stage.close();
+                board.getStage().close();
                 return;
             }
         }

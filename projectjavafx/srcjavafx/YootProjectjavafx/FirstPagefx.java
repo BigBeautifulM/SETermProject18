@@ -33,4 +33,18 @@ public class FirstPagefx extends Application {
             firstpagefx.close();
         }
     }
+
+    public static void showFirstPage(){
+        try{
+            FXMLLoader loader = new FXMLLoader(FirstPagefx.class.getResource("/YootProjectjavafx/FirstPage.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            firstpagefx = stage;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
